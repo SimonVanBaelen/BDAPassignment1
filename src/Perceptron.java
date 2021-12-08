@@ -55,7 +55,6 @@ public class Perceptron extends IncrementalLearner<Double> {
       for (int i = 0; i < weights.length-1; i++){
         double delta = 0;
         for (int j = 0; j < miniBatch.length; j++){
-          System.out.println(j);
           if (miniBatch[j] != null){
             double predictionj = makePrediction((Double[]) miniBatch[j].attributeValues);
             double error = (miniBatch[j].classValue - predictionj);
