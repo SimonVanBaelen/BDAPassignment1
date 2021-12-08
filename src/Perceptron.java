@@ -17,6 +17,7 @@ public class Perceptron extends IncrementalLearner<Double> {
   private double[] weights;
   private final double eta = 0.01;
   private Example[] miniBatch = new Example[64];
+  private  int nbProcessedPerceptron;
 
 
   /**
@@ -29,6 +30,7 @@ public class Perceptron extends IncrementalLearner<Double> {
    */
   public Perceptron(int numFeatures, double learningRate) {
     nbExamplesProcessed = 0;
+    nbProcessedPerceptron = 0;
     this.learningRate = learningRate;
     weights = new double[numFeatures];
     /*
@@ -48,31 +50,34 @@ public class Perceptron extends IncrementalLearner<Double> {
   @Override
   public void update(Example<Double> example) {
     super.update(example);
-//    if (nbExamplesProcessed % 64 == 0){
-//      for (int i = 0; i < weights.length-1; i++){
-//        double delta = 0;
-//        for (int j = 0; j < miniBatch.length; j++){
-//          System.out.println(j);
-//          double predictionj = makePrediction((Double[]) miniBatch[j].attributeValues);
-//          double error = (miniBatch[j].classValue - predictionj);
-//          double xij = (double) miniBatch[j].attributeValues[i];
-//          delta += error*xij;
-//        }
-//        weights[i] = weights[i] + eta*delta;
-//      }
-//      miniBatch[0] = example;
-//    }else{
-//      miniBatch[nbExamplesProcessed % 64] = example;
-//    }
-
-    double delta = 0;
-    for (int i = 0; i < weights.length-1; i++){
-          double prediction = makePrediction( example.attributeValues);
-          double error = (example.classValue - prediction);
-          double xij = example.attributeValues[i];
-          delta += error*xij;
-          weights[i] = weights[i] + eta*delta;
+    nbExamplesProcessed++;
+    if (nbExamplesProcessed % 64 == 0){
+      for (int i = 0; i < weights.length-1; i++){
+        double delta = 0;
+        for (int j = 0; j < miniBatch.length; j++){
+          System.out.println(j);
+          if (miniBatch[j] != null){
+            double predictionj = makePrediction((Double[]) miniBatch[j].attributeValues);
+            double error = (miniBatch[j].classValue - predictionj);
+            double xij = (double) miniBatch[j].attributeValues[i];
+            delta += error*xij;
+          }
+        }
+        weights[i] = weights[i] + eta*delta;
+      }
+      miniBatch[0] = example;
+    }else{
+      miniBatch[nbExamplesProcessed % 64] = example;
     }
+
+//    double delta = 0;
+//    for (int i = 0; i < weights.length-1; i++){
+//          double prediction = makePrediction( example.attributeValues);
+//          double error = (example.classValue - prediction);
+//          double xij = example.attributeValues[i];
+//          delta += error*xij;
+//          weights[i] = weights[i] + eta*delta;
+//    }
 
 
     /*
