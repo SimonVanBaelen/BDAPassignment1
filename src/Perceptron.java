@@ -18,7 +18,7 @@ public class Perceptron extends IncrementalLearner<Double> {
   private double learningRate;
   private double[] weights;
   //TODO dit testen
-  private final double eta = 0.0001; //0.0000001  0.0001/0.00001--> GOED! 65%
+  private final double eta = 0.00001; //0.0000001  0.0001/0.00001--> GOED! 65%
   private Example[] miniBatch = new Example[64];
   private int nbProcessedPerceptron;
   //TODO dit testen
@@ -56,18 +56,15 @@ public class Perceptron extends IncrementalLearner<Double> {
   @Override
   public void update(Example<Double> example) {
     super.update(example);
-    for (int t = 0; t < epoch; t++){
-      double prediction = makePrediction(example.attributeValues);
-      double error = example.classValue*2-1 - prediction; //TODO
-//    System.out.println("NB: " + t + " error: " +error);
-      weights[0] += eta*error;
-      for (int i = 1; i < weights.length; i++) {
-        double xi = example.attributeValues[i-1];
-        double delta = error * xi * eta;
-        weights[i] += delta;
-      }
+    double prediction = makePrediction(example.attributeValues);
+    double error = example.classValue*2-1 - prediction; //TODO
+//    System.out.println("NB: " + nbExamplesProcessed + " error: " +error);
+    weights[0] += eta*error;
+    for (int i = 1; i < weights.length; i++) {
+       double xi = example.attributeValues[i-1];
+       double delta = error * xi * eta;
+       weights[i] += delta;
     }
-
 
 //    System.out.println("Epoch: " + nbExamplesProcessed + " error: " + makePrediction(example.attributeValues));
   }
