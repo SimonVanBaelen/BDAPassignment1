@@ -87,11 +87,12 @@ public class Perceptron extends IncrementalLearner<Double> {
       pr += example[i]*weights[i+1];
     }
     //pr = (pr-1)/2; // z = (x-min)/(max-min) <=> x = z*(max-min)+min
-    if (pr >= 0){
-      return 1;
-    }else{
-      return 0;
-    }
+//    if (pr >= 0){
+//      return 1;
+//    }else{
+//      return 0;
+//    }
+    return pr;
   }
 
   /**
