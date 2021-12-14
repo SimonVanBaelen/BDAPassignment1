@@ -18,7 +18,7 @@ public class Perceptron extends IncrementalLearner<Double> {
   private double learningRate;
   private double[] weights;
   //TODO dit testen
-  private final double eta = 0.000001; //0.0000001
+  private final double eta = 0.00000001; //0.0000001
   private Example[] miniBatch = new Example[64];
   private int nbProcessedPerceptron;
   //TODO dit testen
@@ -64,7 +64,7 @@ public class Perceptron extends IncrementalLearner<Double> {
       for (int i = 1; i < weights.length-1; i++) {
         double xi = example.attributeValues[i];
         double delta = error * xi * eta;
-        weights[i] += delta;
+        weights[i] -= delta;
       }
     }
   }
