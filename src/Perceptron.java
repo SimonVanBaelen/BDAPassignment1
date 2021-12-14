@@ -22,7 +22,7 @@ public class Perceptron extends IncrementalLearner<Double> {
   private Example[] miniBatch = new Example[64];
   private int nbProcessedPerceptron;
   //TODO dit testen
-  private final int epoch = 20;
+  private final int epoch = 50;
 
 
   /**
@@ -56,17 +56,23 @@ public class Perceptron extends IncrementalLearner<Double> {
   @Override
   public void update(Example<Double> example) {
     super.update(example);
+    double error = 100000000;
     for (int t = 1; t < epoch; t++) {
       double prediction = makePrediction(example.attributeValues);
-      double error = example.classValue - prediction;
-      System.out.println("Epoch: " + t + " error: " +error);
-      weights[0] += eta*error;
-      for (int i = 1; i < weights.length-1; i++) {
-        double xi = example.attributeValues[i];
-        double delta = error * xi * eta;
-        weights[i] += delta;
+      double prevError = error;
+      error = example.classValue - prediction;
+        if (error <= prevError){
+          System.out.println("Epoch: " + t + " error: " +error);
+          weights[0] += eta*error;
+          for (int i = 1; i < weights.length-1; i++) {
+            double xi = example.attributeValues[i];
+            double delta = error * xi * eta;
+            weights[i] += delta;
+          }
+        }else{
+          break;
+        }
       }
-    }
   }
 
   /**
