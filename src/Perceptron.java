@@ -17,9 +17,11 @@ public class Perceptron extends IncrementalLearner<Double> {
 
   private double learningRate;
   private double[] weights;
-  private final double eta = 0.000001; //0.0000001
+  //TODO dit testen
+  private final double eta = 0.001; //0.0000001
   private Example[] miniBatch = new Example[64];
   private int nbProcessedPerceptron;
+  //TODO dit testen
   private final int epoch = 50;
 
 
@@ -87,12 +89,12 @@ public class Perceptron extends IncrementalLearner<Double> {
       pr += example[i]*weights[i+1];
     }
     //pr = (pr-1)/2; // z = (x-min)/(max-min) <=> x = z*(max-min)+min
-//    if (pr >= 0){
-//      return 1;
-//    }else{
-//      return 0;
-//    }
-    return pr;
+    //TODO dit testen
+    if (pr >= 0){
+      return 1;
+    }else{
+      return 0;
+    }
   }
 
   /**
