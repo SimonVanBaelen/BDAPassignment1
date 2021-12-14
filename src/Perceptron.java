@@ -22,7 +22,7 @@ public class Perceptron extends IncrementalLearner<Double> {
   private Example[] miniBatch = new Example[64];
   private int nbProcessedPerceptron;
   //TODO dit testen
-  private final int epoch = 10;
+  private final int epoch = 2;
 
 
   /**
