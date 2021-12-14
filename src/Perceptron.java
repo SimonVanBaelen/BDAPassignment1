@@ -59,7 +59,7 @@ public class Perceptron extends IncrementalLearner<Double> {
     for (int t = 0; t < epoch; t++){
       double prediction = makePrediction(example.attributeValues);
       double error = example.classValue*2-1 - prediction; //TODO
-    System.out.println("NB: " + t + " error: " +error);
+//    System.out.println("NB: " + t + " error: " +error);
       weights[0] += eta*error;
       for (int i = 1; i < weights.length; i++) {
         double xi = example.attributeValues[i-1];
