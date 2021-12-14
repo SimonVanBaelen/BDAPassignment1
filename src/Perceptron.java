@@ -57,7 +57,7 @@ public class Perceptron extends IncrementalLearner<Double> {
   public void update(Example<Double> example) {
     super.update(example);
     double prediction = makePrediction(example.attributeValues);
-    double error = example.classValue*2-1 - prediction; //TODO
+    double error = example.classValue - prediction; //TODO
 //    System.out.println("NB: " + nbExamplesProcessed + " error: " +error);
     weights[0] += eta*error;
     for (int i = 1; i < weights.length; i++) {
@@ -92,7 +92,7 @@ public class Perceptron extends IncrementalLearner<Double> {
     //pr = (pr-1)/2; // z = (x-min)/(max-min) <=> x = z*(max-min)+min
     //TODO dit testen
 //    System.out.println(pr);
-    return (pr-1)/2;
+    return pr;
   }
 
   /**
