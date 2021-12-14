@@ -94,7 +94,7 @@ public class Perceptron extends IncrementalLearner<Double> {
     // https://sebastianraschka.com/Articles/2015_singlelayer_neurons.html#adaptive-linear-neurons-and-the-delta-rule
     double pr = weights[0];
     for (int i = 1; i < weights.length-1; i++){
-      pr += example[i]*weights[i];
+      pr += example[i-1]*weights[i];
     }
     //pr = (pr-1)/2; // z = (x-min)/(max-min) <=> x = z*(max-min)+min
     //TODO dit testen
