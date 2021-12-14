@@ -18,11 +18,11 @@ public class Perceptron extends IncrementalLearner<Double> {
   private double learningRate;
   private double[] weights;
   //TODO dit testen
-  private final double eta = 0.0001; //0.0000001
+  private final double eta = 0.01; //0.0000001
   private Example[] miniBatch = new Example[64];
   private int nbProcessedPerceptron;
   //TODO dit testen
-  private final int epoch = 100;
+  private final int epoch = 50;
 
 
   /**
