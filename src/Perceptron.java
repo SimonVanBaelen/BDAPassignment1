@@ -73,7 +73,7 @@ public class Perceptron extends IncrementalLearner<Double> {
           break;
         }
       }
-    System.out.println("Epoch: " + nbExamplesProcessed + " error: " + makePrediction(example.attributeValues));
+//    System.out.println("Epoch: " + nbExamplesProcessed + " error: " + makePrediction(example.attributeValues));
   }
 
   /**
