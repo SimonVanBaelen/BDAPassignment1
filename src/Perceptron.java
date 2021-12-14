@@ -90,11 +90,7 @@ public class Perceptron extends IncrementalLearner<Double> {
     }
     //pr = (pr-1)/2; // z = (x-min)/(max-min) <=> x = z*(max-min)+min
     //TODO dit testen
-    if (pr >= 0){
-      return 1;
-    }else{
-      return 0;
-    }
+    return pr*2-1;
   }
 
   /**
