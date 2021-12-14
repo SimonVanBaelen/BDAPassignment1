@@ -10,14 +10,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static java.lang.Math.abs;
+
 /** This class is a stub for incrementally building a Perceptron model. */
 public class Perceptron extends IncrementalLearner<Double> {
 
   private double learningRate;
   private double[] weights;
-  private final double eta = 0.01;
+  private final double eta = 0.000001; //0.0000001
   private Example[] miniBatch = new Example[64];
-  private  int nbProcessedPerceptron;
+  private int nbProcessedPerceptron;
+  private final int epoch = 50;
 
 
   /**
@@ -32,7 +35,8 @@ public class Perceptron extends IncrementalLearner<Double> {
     nbExamplesProcessed = 0;
     nbProcessedPerceptron = 0;
     this.learningRate = learningRate;
-    weights = new double[numFeatures];
+    weights = new double[numFeatures+1];
+    System.out.println(weights[1]);
     /*
       FILL IN HERE
       You will need other data structures, initialize them here
@@ -50,40 +54,16 @@ public class Perceptron extends IncrementalLearner<Double> {
   @Override
   public void update(Example<Double> example) {
     super.update(example);
-    nbExamplesProcessed++;
-    if (nbExamplesProcessed % 64 == 0){
-      for (int i = 0; i < weights.length-1; i++){
-        double delta = 0;
-        for (int j = 0; j < miniBatch.length; j++){
-          if (miniBatch[j] != null){
-            double predictionj = makePrediction((Double[]) miniBatch[j].attributeValues);
-            double error = (miniBatch[j].classValue - predictionj);
-            double xij = (double) miniBatch[j].attributeValues[i];
-            delta += error*xij;
-          }
-        }
-        weights[i] = weights[i] + eta*delta;
+    for (int t = 1; t < epoch; t++) {
+      double prediction = makePrediction(example.attributeValues);
+      double error = example.classValue - prediction;
+      weights[0] += eta*error;
+      for (int i = 1; i < weights.length-1; i++) {
+        double xi = example.attributeValues[i];
+        double delta = error * xi * eta;
+        weights[i] += delta;
       }
-      miniBatch[0] = example;
-    }else{
-      miniBatch[nbExamplesProcessed % 64] = example;
     }
-
-//    double delta = 0;
-//    for (int i = 0; i < weights.length-1; i++){
-//          double prediction = makePrediction( example.attributeValues);
-//          double error = (example.classValue - prediction);
-//          double xij = example.attributeValues[i];
-//          delta += error*xij;
-//          weights[i] = weights[i] + eta*delta;
-//    }
-
-
-    /*
-      FILL IN HERE
-      Update the parameters given the new data to improve J(weights)
-    */
-
   }
 
   /**
@@ -100,11 +80,18 @@ public class Perceptron extends IncrementalLearner<Double> {
    */
   @Override
   public double makePrediction(Double[] example) {
-    double pr = 0;
-    for (int i = 0; i < weights.length-1; i++){
-        pr = example[i]*weights[i];
+    // https://machinelearningmastery.com/implement-perceptron-algorithm-scratch-python/
+    // https://sebastianraschka.com/Articles/2015_singlelayer_neurons.html#adaptive-linear-neurons-and-the-delta-rule
+    double pr = weights[0];
+    for (int i = 1; i < weights.length-1; i++){
+      pr += example[i]*weights[i+1];
     }
-    return pr;
+    //pr = (pr-1)/2; // z = (x-min)/(max-min) <=> x = z*(max-min)+min
+    if (pr >= 0){
+      return 1;
+    }else{
+      return 0;
+    }
   }
 
   /**
@@ -148,8 +135,8 @@ public class Perceptron extends IncrementalLearner<Double> {
   public static void main(String[] args) {
     if (args.length < 4) {
       System.err.println(
-          "Usage: java Perceptron <learningRate> <data set> <output file> <reportingPeriod>"
-              + " [-writeOutAllPredictions]");
+              "Usage: java Perceptron <learningRate> <data set> <output file> <reportingPeriod>"
+                      + " [-writeOutAllPredictions]");
       throw new Error("Expected 4 or 5 arguments, got " + args.length + ".");
     }
     try {
@@ -159,7 +146,7 @@ public class Perceptron extends IncrementalLearner<Double> {
       String out = args[2];
       int reportingPeriod = Integer.parseInt(args[3]);
       boolean writeOutAllPredictions =
-          args.length > 4 && args[4].contains("writeOutAllPredictions");
+              args.length > 4 && args[4].contains("writeOutAllPredictions");
 
       // initialize learner
       Perceptron perceptron = new Perceptron(data.getNbFeatures(), learningRate);
