@@ -92,7 +92,7 @@ public class Perceptron extends IncrementalLearner<Double> {
     //pr = (pr-1)/2; // z = (x-min)/(max-min) <=> x = z*(max-min)+min
     //TODO dit testen
 //    System.out.println(pr);
-    return pr;
+    return (pr-1)/2;
   }
 
   /**
