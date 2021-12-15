@@ -33,7 +33,7 @@ NMIN=200
 
 # Experiment parameters
 OUT=out
-PERIOD=150000  # Original was 200000
+PERIOD=30000  # Original was 200000
 
 # Compilation  ###############################################################
 
