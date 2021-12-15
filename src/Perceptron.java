@@ -3,7 +3,9 @@
  * without permission. Written by Pieter Robberechts, 2021
  */
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -97,9 +99,22 @@ public class Perceptron extends IncrementalLearner<Double> {
    */
   @Override
   public void writeModel(String path) throws IOException {
-//    String text = weights.toString();
-//    Path file = Paths.get("pc.model");
-//    Files.write(file, text, StandardCharsets.UTF_8);
+    //https://www.w3schools.com/java/java_files_create.asp
+    File modelFile = new File(path);
+    modelFile.createNewFile();
+
+    String model = "";
+    for (int i = 0; i < weights.length; i++){
+      if(i == weights.length-1){
+        model = model + weights[i];
+      }else{
+        model = weights[i] + " ";
+      }
+    }
+
+    FileWriter writer = new FileWriter(path);
+    writer.write(model);
+    writer.close();
   }
 
   /**
@@ -116,6 +131,8 @@ public class Perceptron extends IncrementalLearner<Double> {
   @Override
   public void readModel(String path, int nbExamplesProcessed) throws IOException {
     super.readModel(path, nbExamplesProcessed);
+    String content = Files.readString(Paths.get(path), StandardCharsets.US_ASCII);
+    System.out.println(content);
   }
 
   /**
