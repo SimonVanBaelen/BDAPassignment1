@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static java.lang.Math.abs;
 
@@ -132,6 +133,7 @@ public class Perceptron extends IncrementalLearner<Double> {
   public void readModel(String path, int nbExamplesProcessed) throws IOException {
     super.readModel(path, nbExamplesProcessed);
     String[] content = Files.readString(Paths.get(path), StandardCharsets.US_ASCII).split(" ");
+    System.out.println(Arrays.toString(content));
     for (int i = 0; i < weights.length; i++){
       weights[i] = Double.parseDouble(content[i]);
     }
