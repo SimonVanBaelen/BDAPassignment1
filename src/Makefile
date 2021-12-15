@@ -24,7 +24,7 @@ NB_FEATURE_VALUES=${DATAFOLDER}/nbFeatureValues.csv
 
 
 # Parameters for perceptron
-ETA=0.000000001
+ETA=0.00001
 
 # Parameters for VFDT
 DELTA=0.0000001
@@ -33,7 +33,7 @@ NMIN=200
 
 # Experiment parameters
 OUT=out
-PERIOD=30000  # Original was 200000
+PERIOD=100000  # Original was 200000
 
 # Compilation  ###############################################################
 
@@ -95,13 +95,13 @@ pc_clean: $(class_d)/Perceptron.class
 	@echo "training perceptron on all data"
 	rm -f $(OUT).clean.pc.acc ;
 	rm -f $(OUT).clean.pc.prob;
-	time java -Xmx4g -cp .:$(class_d) Perceptron $(ETA) $(DATA_PC_CLEAN) $(OUT).clean $(PERIOD)
+	time java -Xmx1800m -cp .:$(class_d) Perceptron $(ETA) $(DATA_PC_CLEAN) $(OUT).clean $(PERIOD)
 
 pc_noise: $(class_d)/Perceptron.class
 	@echo "training perceptron on all data"
 	rm -f $(OUT).noise.pc.acc ;
 	rm -f $(OUT).noise.pc.prob;
-	time java -Xmx4g -cp .:$(class_d) Perceptron $(ETA) $(DATA_PC_NOISE) $(OUT).noise $(PERIOD)
+	time java -Xmx1800m -cp .:$(class_d) Perceptron $(ETA) $(DATA_PC_NOISE) $(OUT).noise $(PERIOD)
 
 vfdt_small: $(class_d)/Vfdt.class
 	@echo "Testing VFDT on subset of clean data"
@@ -113,10 +113,10 @@ vfdt_clean: $(class_d)/Vfdt.class
 	@echo "Testing VFDT on subset of data"
 	rm -f $(OUT).clean.vfdt.acc ;
 	rm -f $(OUT).clean.vfdt.prob;
-	time java -Xmx4g -cp .:$(class_d) Vfdt $(DELTA) $(TAU) $(NMIN) $(DATA_VFDT_CLEAN) $(NB_FEATURE_VALUES) $(OUT).clean $(PERIOD)
+	time java -Xmx1800m -cp .:$(class_d) Vfdt $(DELTA) $(TAU) $(NMIN) $(DATA_VFDT_CLEAN) $(NB_FEATURE_VALUES) $(OUT).clean $(PERIOD)
 
 vfdt_noise: $(class_d)/Vfdt.class
 	@echo "Testing VFDT on subset of data"
 	rm -f $(OUT).noise.vfdt.acc ;
 	rm -f $(OUT).noise.vfdt.prob;
-	time java -Xmx4g -cp .:$(class_d) Vfdt $(DELTA) $(TAU) $(NMIN) $(DATA_VFDT_NOISE) $(NB_FEATURE_VALUES) $(OUT).noise $(PERIOD)
+	time java -Xmx1800m -cp .:$(class_d) Vfdt $(DELTA) $(TAU) $(NMIN) $(DATA_VFDT_NOISE) $(NB_FEATURE_VALUES) $(OUT).noise $(PERIOD)
