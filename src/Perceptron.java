@@ -112,8 +112,6 @@ public class Perceptron extends IncrementalLearner<Double> {
         model.append(weights[i]).append(" ");
       }
     }
-    System.out.println(weights.length);
-    System.out.println(model);
     FileWriter writer = new FileWriter(path);
     writer.write(model.toString());
     writer.close();
@@ -134,7 +132,6 @@ public class Perceptron extends IncrementalLearner<Double> {
   public void readModel(String path, int nbExamplesProcessed) throws IOException {
     super.readModel(path, nbExamplesProcessed);
     String[] content = Files.readString(Paths.get(path), StandardCharsets.US_ASCII).split(" ");
-    System.out.println(Arrays.toString(content));
     for (int i = 0; i < weights.length; i++){
       weights[i] = Double.parseDouble(content[i]);
     }
