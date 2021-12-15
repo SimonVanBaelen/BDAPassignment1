@@ -131,8 +131,10 @@ public class Perceptron extends IncrementalLearner<Double> {
   @Override
   public void readModel(String path, int nbExamplesProcessed) throws IOException {
     super.readModel(path, nbExamplesProcessed);
-    String content = Files.readString(Paths.get(path), StandardCharsets.US_ASCII);
-    System.out.println(content);
+    String[] content = Files.readString(Paths.get(path), StandardCharsets.US_ASCII).split(" ");
+    for (int i = 0; i < weights.length; i++){
+      weights[i] = Double.parseDouble(content[i]);
+    }
   }
 
   /**
