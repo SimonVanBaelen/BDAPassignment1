@@ -104,18 +104,18 @@ public class Perceptron extends IncrementalLearner<Double> {
     File modelFile = new File(path);
     modelFile.createNewFile();
 
-    String model = "";
+    StringBuilder model = new StringBuilder();
     for (int i = 0; i < weights.length; i++){
       if(i == weights.length-1){
-        model = model + weights[i];
+        model.append(weights[i]);
       }else{
-        model = weights[i] + " ";
+        model.append(weights[i]).append(" ");
       }
     }
     System.out.println(weights.length);
     System.out.println(model);
     FileWriter writer = new FileWriter(path);
-    writer.write(model);
+    writer.write(model.toString());
     writer.close();
   }
 
