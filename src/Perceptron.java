@@ -19,10 +19,7 @@ public class Perceptron extends IncrementalLearner<Double> {
   private double[] weights;
   //TODO dit testen
   private final double eta = 0.00001; //0.0000001  0.0001/0.00001--> GOED! 65%
-  private Example[] miniBatch = new Example[64];
-  private int nbProcessedPerceptron;
   //TODO dit testen
-  private final int epoch = 50;
 
 
   /**
@@ -35,15 +32,8 @@ public class Perceptron extends IncrementalLearner<Double> {
    */
   public Perceptron(int numFeatures, double learningRate) {
     nbExamplesProcessed = 0;
-    nbProcessedPerceptron = 0;
     this.learningRate = learningRate;
     weights = new double[numFeatures+1];
-    System.out.println(weights[1]);
-    /*
-      FILL IN HERE
-      You will need other data structures, initialize them here
-    */
-
   }
 
   /**
