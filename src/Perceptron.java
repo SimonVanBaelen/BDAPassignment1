@@ -112,7 +112,8 @@ public class Perceptron extends IncrementalLearner<Double> {
         model = weights[i] + " ";
       }
     }
-
+    System.out.println(weights.length);
+    System.out.println(model);
     FileWriter writer = new FileWriter(path);
     writer.write(model);
     writer.close();
