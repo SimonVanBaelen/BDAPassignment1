@@ -41,9 +41,9 @@ public class VfdtNode {
       if (m > maxFeature){
         maxFeature = m;
       }
-    System.out.println("All features: " + Arrays.toString(possibleSplitFeatures));
     }
     nijk = new int[nbFeatureValues.length][maxFeature][2];
+    System.out.println(Arrays.toString(nbFeatureValues));
   }
 
   public int[][][] getNijk(){
