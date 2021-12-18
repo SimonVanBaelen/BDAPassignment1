@@ -77,6 +77,7 @@ public class VfdtNode {
     for (int i = 0; i < n; i++){
       //new VfdtNode(this.nbFeatureValues,possibleFeatures)
       children[i] = nodes[i];
+      nijk = null;
     }
   }
 
