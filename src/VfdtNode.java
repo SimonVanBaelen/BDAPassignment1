@@ -143,13 +143,13 @@ public class VfdtNode {
           currentPosition += nijk[featureId][j][k]-1;
           for(int a = prevPosition; a <= currentPosition; a++){
             allPositions[a] = j;
+            allValues.add(j);
           }
           prevPosition = currentPosition+1;
-          allValues.add(j);
         }
       }
     }
-    System.out.println("Amount of possible: " + Arrays.toString(nijk[featureId]));
+    System.out.println("Amount of possible: " + allValues.toString());
 
     // Step 3: iterate over all nijk and create the nijk of all subsets.
     int[][] allClassesOfSubSets = new int[allValues.size()][amountOfClasses];
