@@ -164,7 +164,7 @@ public class VfdtNode {
       }
     }
 
-
+    allPositions = null;
 
     // Step 4: calculate information gain
 //    double currentEntropy = calculateEntropy(amountPerClass, totalEx);
