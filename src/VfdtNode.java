@@ -43,7 +43,6 @@ public class VfdtNode {
       }
     }
     nijk = new int[nbFeatureValues.length][maxFeature][2];
-    System.out.println(Arrays.toString(nbFeatureValues));
   }
 
   public int[][][] getNijk(){
@@ -150,7 +149,7 @@ public class VfdtNode {
         }
       }
     }
-
+    System.out.println("Amount of possible: " + nijk[featureId].length);
 
     // Step 3: iterate over all nijk and create the nijk of all subsets.
     int[][] allClassesOfSubSets = new int[allValues.size()][amountOfClasses];
