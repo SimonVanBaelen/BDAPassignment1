@@ -132,7 +132,8 @@ public class VfdtNode {
     }
     double currentEntropy = calculateEntropy(amountPerClass, totalEx);
     System.out.println("Amount of classes: " + amountOfClasses);
-    System.out.println("Amount per class: " + amountPerClass.toString());
+    System.out.println("Amount per class: " + amountPerClass[0]);
+    System.out.println("Amount per class: " + amountPerClass[1]);
     System.out.println("Entropy " + currentEntropy);
 
     // Step 2: find all positions of the value of the and all possible values of featureID.
