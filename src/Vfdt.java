@@ -126,7 +126,10 @@ public class Vfdt extends IncrementalLearner<Integer> {
       totalOne += nijk[0][firstFeature][1];
       totalZero += nijk[0][firstFeature][0];
     }
-    double prediction = totalOne/(totalZero+totalOne);
+    double prediction = 0;
+    if(totalOne != 0 && totalZero != 0){
+      prediction = totalOne/(totalZero+totalOne);
+    }
     return prediction*2-1;
   }
 
