@@ -16,6 +16,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
   private double delta;
   private double tau;
   private double nmin;
+  private int nbSplits;
 
   private VfdtNode root;
 

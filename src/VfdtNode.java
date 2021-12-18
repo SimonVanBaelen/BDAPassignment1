@@ -67,7 +67,7 @@ public class VfdtNode {
    */
   public void addChildren(int splitFeature, VfdtNode[] nodes) {
     if (nodes == null) throw new IllegalArgumentException("null children");
-    nbSplits++;
+//    nbSplits++;
 
     // Add the feature on which was split.
     this.splitFeature = splitFeature;
