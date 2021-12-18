@@ -123,7 +123,7 @@ public class VfdtNode {
     // Step 1: find amount of examples and amount belonging to class c.
     int totalEx = 0;
     int amountOfClasses = nijk[0][0].length;
-    int[] amountPerClass = new int[amountOfClasses];
+    double[] amountPerClass = new double[amountOfClasses];
     for(int j = 0; j < nijk[featureId].length; j++){
       for(int k = 0; k < nijk[featureId][j].length; k++){
         totalEx += nijk[featureId][j][k];
@@ -131,10 +131,7 @@ public class VfdtNode {
       }
     }
     double currentEntropy = calculateEntropy(amountPerClass, totalEx);
-    System.out.println("Total ex: " + totalEx);
-    System.out.println("Amount per class: " + amountPerClass[0]);
-    System.out.println("Amount per class: " + amountPerClass[1]);
-    System.out.println("Entropy " + currentEntropy);
+    System.out.println("Entropy: " + currentEntropy);
 
     // Step 2: find all positions of the value of the and all possible values of featureID.
     int[] allPositions = new int[totalEx];
@@ -177,14 +174,14 @@ public class VfdtNode {
       for(int o = 0; o < allClassesOfSubSets[i].length; o++){
         amountSubset += allClassesOfSubSets[i][o];
       }
-      double cei = calculateEntropy(allClassesOfSubSets[i], amountSubset);
-      entropySubsets -= cei*(amountSubset/totalEx);
+//      double cei = calculateEntropy(allClassesOfSubSets[i], amountSubset);
+//      entropySubsets -= cei*(amountSubset/totalEx);
     }
     ig = currentEntropy + entropySubsets;
     return ig;
   }
 
-  private static double calculateEntropy(int[] amountPerClass, int S) {
+  private static double calculateEntropy(double[] amountPerClass, double S) {
     double ce = 0;
     for (int i = 0; i < amountPerClass.length; i++){
       double pi = amountPerClass[i]/S;
