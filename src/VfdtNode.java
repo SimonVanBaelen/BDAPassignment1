@@ -156,7 +156,7 @@ public class VfdtNode {
       for(int j = 0; j < nijk[i].length; j++){
         for(int k = 0; k < nijk[i][j].length; k++){
           for(int t = 0; t < nijk[i][j][k]; t++){
-            allClassesOfSubSets[index+t][k] += 1;
+            allClassesOfSubSets[allPositions[index+t]][k] += 1;
           }
           index += nijk[i][j][k];
         }
