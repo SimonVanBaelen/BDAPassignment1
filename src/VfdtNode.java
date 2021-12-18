@@ -124,47 +124,28 @@ public class VfdtNode {
     // Step 1: find amount of examples and amount belonging to class c.
     int totalEx = 0;
     int amountOfClasses = nijk[0][0].length;
+    HashSet<Integer> allValues = new HashSet<>();
     double[] amountPerClass = new double[amountOfClasses];
     for(int j = 0; j < nijk[featureId].length; j++){
       for(int k = 0; k < nijk[featureId][j].length; k++){
         totalEx += nijk[featureId][j][k];
         amountPerClass[k] += nijk[featureId][j][k];
+        allValues.add(j);
       }
     }
     double currentEntropy = calculateEntropy(amountPerClass, totalEx);
 
     // Step 2: find all positions of the value of the and all possible values of featureID.
-    int[] allPositions = new int[totalEx];
-    int currentPosition = 0;
-    int prevPosition = 0;
-    HashSet<Integer> allValues = new HashSet<>();
-    for(int j = 0; j < nijk[featureId].length; j++){
-      if (nijk[featureId][j] != null){
-        for(int k = 0; k < nijk[featureId][j].length; k++){
-          currentPosition += nijk[featureId][j][k]-1;
-          for(int a = prevPosition; a <= currentPosition; a++){
-            allPositions[a] = j;
-            allValues.add(j);
-          }
-          prevPosition = currentPosition+1;
-        }
-      }
-    }
-
 
     // Step 3: iterate over all nijk and create the nijk of all subsets.
     int[][] allClassesOfSubSets = new int[allValues.size()][amountOfClasses];
-    int index = 0;
     for(int j = 0; j < nijk[featureId].length; j++){
       for(int k = 0; k < nijk[featureId][j].length; k++){
         if(nijk[featureId][j][k] != 0){
-          allClassesOfSubSets[allPositions[index]][k] += nijk[featureId][j][k];
-          index += nijk[featureId][j][k];
+          allClassesOfSubSets[j][k] += nijk[featureId][j][k];
         }
       }
     }
-
-    allPositions = null;
 
     // Step 4: calculate information gain
 //    double currentEntropy = calculateEntropy(amountPerClass, totalEx);
