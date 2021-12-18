@@ -149,8 +149,8 @@ public class VfdtNode {
         }
       }
     }
-    System.out.println("Amount of possible: " + allValues.toString());
 
+    System.out.println("Amount "+amountOfClasses);
     // Step 3: iterate over all nijk and create the nijk of all subsets.
     int[][] allClassesOfSubSets = new int[allValues.size()][amountOfClasses];
     int index = 0;
