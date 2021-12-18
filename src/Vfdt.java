@@ -121,8 +121,8 @@ public class Vfdt extends IncrementalLearner<Integer> {
     VfdtNode node = root.sortExample(example);
     int[][][] nijk = node.getNijk();
     int firstFeature = node.getPossibleSplitFeatures()[0];
-    int totalOne = 0;
-    int totalZero = 0;
+    double totalOne = 0;
+    double totalZero = 0;
     for(int j = 0; j < nijk[0][firstFeature].length ; j++){
       totalOne += nijk[0][firstFeature][1];
       totalZero += nijk[0][firstFeature][0];
