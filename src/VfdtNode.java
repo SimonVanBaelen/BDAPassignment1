@@ -130,6 +130,10 @@ public class VfdtNode {
         amountPerClass[k] += nijk[featureId][j][k];
       }
     }
+    double currentEntropy = calculateEntropy(amountPerClass, totalEx);
+    System.out.println("Amount of classes: " + amountOfClasses);
+    System.out.println("Amount per class: " + amountPerClass.toString());
+    System.out.println("Entropy " + currentEntropy);
 
     // Step 2: find all positions of the value of the and all possible values of featureID.
     int[] allPositions = new int[totalEx];
@@ -165,7 +169,7 @@ public class VfdtNode {
 
 
     // Step 4: calculate information gain
-    double currentEntropy = calculateEntropy(amountPerClass, totalEx);
+//    double currentEntropy = calculateEntropy(amountPerClass, totalEx);
     double entropySubsets = 0;
     for (int i = 0; i < amountPerClass.length; i++){
       int amountSubset = 0;
