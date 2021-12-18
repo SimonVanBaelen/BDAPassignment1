@@ -64,6 +64,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     // Step 2: check if update is necessary
     // Step 2.1: check size requirement
     int sizeNijk = node.getNijkSize();
+    System.out.println(sizeNijk);
     if(sizeNijk >= nmin){
       // Step 2.2: check Hoeffding bound
       int[] possibleSplitFeatures = node.getPossibleSplitFeatures();
@@ -71,16 +72,8 @@ public class Vfdt extends IncrementalLearner<Integer> {
       int a = 0;
       double Gb = 0;
       int b = 0;
-      System.out.println(nbExamplesProcessed);
-      if(nbExamplesProcessed < 400){
-        System.out.println(Arrays.toString(possibleSplitFeatures));
-      }
-
       for(int i:possibleSplitFeatures){
         double G = node.splitEval(i);
-        if(nbExamplesProcessed < 202){
-          node.splitEval(i);
-        }
         if(Ga < G){
           Gb = Ga; b = a;
           Ga = G; a = i;
