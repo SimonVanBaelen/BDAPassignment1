@@ -131,7 +131,7 @@ public class VfdtNode {
       }
     }
     double currentEntropy = calculateEntropy(amountPerClass, totalEx);
-    System.out.println("Amount of classes: " + amountOfClasses);
+    System.out.println("Total ex: " + totalEx);
     System.out.println("Amount per class: " + amountPerClass[0]);
     System.out.println("Amount per class: " + amountPerClass[1]);
     System.out.println("Entropy " + currentEntropy);
