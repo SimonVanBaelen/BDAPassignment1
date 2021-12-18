@@ -71,7 +71,8 @@ public class Vfdt extends IncrementalLearner<Integer> {
       int a = 0;
       double Gb = 0;
       int b = 0;
-      if(nbExamplesProcessed < 202){
+      System.out.println(nbExamplesProcessed);
+      if(nbExamplesProcessed < 400){
         System.out.println(Arrays.toString(possibleSplitFeatures));
       }
 
