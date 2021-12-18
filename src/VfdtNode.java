@@ -156,6 +156,7 @@ public class VfdtNode {
     int index = 1;
     for(int j = 0; j < nijk[featureId].length; j++){
       for(int k = 0; k < nijk[featureId][j].length; k++){
+        System.out.println("index: " + index);
         allClassesOfSubSets[allPositions[index-1]][k] += nijk[featureId][j][k];
         index += nijk[featureId][j][k];
       }
