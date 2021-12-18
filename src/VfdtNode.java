@@ -154,16 +154,13 @@ public class VfdtNode {
     // Step 3: iterate over all nijk and create the nijk of all subsets.
     int[][] allClassesOfSubSets = new int[allValues.size()][amountOfClasses];
     int index = 1;
-    for(int i = 0; i < nijk.length; i++){
-      for(int j = 0; j < nijk[i].length; j++){
-        for(int k = 0; k < nijk[i][j].length; k++){
-          if(featureId != i){
-            allClassesOfSubSets[allPositions[index-1]][k] += nijk[i][j][k];
-            index += nijk[i][j][k];
-          }
-        }
+    for(int j = 0; j < nijk[featureId].length; j++){
+      for(int k = 0; k < nijk[featureId][j].length; k++){
+        allClassesOfSubSets[allPositions[index-1]][k] += nijk[featureId][j][k];
+        index += nijk[featureId][j][k];
       }
     }
+
 
 
     // Step 4: calculate information gain
