@@ -161,7 +161,7 @@ public class VfdtNode {
             allClassesOfSubSets[allPositions[index+t]][k] += 1;
           }
           index += nijk[i][j][k];
-          System.out.println("Index: "+ index);
+          System.out.println("Index: "+ nijk[i][j].length);
         }
       }
     }
