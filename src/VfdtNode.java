@@ -150,7 +150,7 @@ public class VfdtNode {
       }
     }
 
-    System.out.println("Amount "+allValues.size());
+
     // Step 3: iterate over all nijk and create the nijk of all subsets.
     int[][] allClassesOfSubSets = new int[allValues.size()][amountOfClasses];
     int index = 0;
@@ -158,6 +158,7 @@ public class VfdtNode {
       for(int j = 0; j < nijk[i].length; j++){
         for(int k = 0; k < nijk[i][j].length; k++){
           for(int t = 0; t < nijk[i][j][k]; t++){
+            System.out.println("Feature; " +allPositions[index+t]);
             allClassesOfSubSets[allPositions[index+t]][k] += 1;
           }
           index += nijk[i][j][k];
