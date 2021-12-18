@@ -6,6 +6,9 @@ import java.io.*;
 import java.util.*;
 import java.util.List;
 
+import static java.lang.Math.log;
+import static java.lang.Math.sqrt;
+
 /** This class is a stub for VFDT. */
 public class Vfdt extends IncrementalLearner<Integer> {
 
@@ -37,10 +40,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
     int[] possibleFeatures = new int[nbFeatureValues.length];
     for (int i = 0; i < nbFeatureValues.length; i++) possibleFeatures[i] = i;
     root = new VfdtNode(nbFeatureValues, possibleFeatures);
-
-    /*
-      FILL IN HERE
-    */
   }
 
   /**
@@ -54,10 +53,54 @@ public class Vfdt extends IncrementalLearner<Integer> {
   public void update(Example<Integer> example) {
     super.update(example);
 
-    /*
-      FILL IN HERE
-    */
+    // Step 1: add example to right node
+    VfdtNode node = root.sortExample(example.attributeValues);
+    int[][][] nijk = node.getNijk();
+    for(int i = 0; i < example.attributeValues.length ; i++){
+        nijk[i][example.attributeValues[i]][example.classValue] += 1;
+    }
 
+    // Step 2: check if update is necessary
+    // Step 2.1: check size requirement
+    int sizeNijk = node.getNijkSize();
+    if(sizeNijk >= nmin){
+      // Step 2.2: check Hoeffding bound
+      int[] possibleSplitFeatures = node.getPossibleSplitFeatures();
+      double Ga = 0;
+      int a = 0;
+      double Gb = 0;
+      int b = 0;
+      for(int i:possibleSplitFeatures){
+        double G = node.splitEval(i);
+        if(Ga < G){
+          Gb = Ga; b = a;
+          Ga = G; a = i;
+        }else if (Gb < G){
+          Gb = G; b = i;
+        }
+      }
+      double deltaG = Ga - Gb;
+      double epsilon = sqrt(log(2/tau)/ (2*sizeNijk));
+      if(deltaG < delta || deltaG > epsilon){
+
+        // Create all possible features for child nodes.
+        Boolean skipped = false;
+        int[] possibleFeatures = new int[node.getPossibleSplitFeatures().length-1];
+        for (int i = 0; i < node.getPossibleSplitFeatures().length; i++){
+          if (node.getSplitFeature() != node.getPossibleSplitFeatures()[i]) {
+            if(!skipped){possibleFeatures[i] = node.getPossibleSplitFeatures()[i];
+            }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
+          }else{skipped = true;}
+        }
+        // Create all child nodes.
+        int n = nbFeatureValues[a];
+        VfdtNode[] children = new VfdtNode[n];
+        for (int i = 0; i < n; i++){
+          children[i] = new VfdtNode(this.nbFeatureValues,possibleFeatures);
+        }
+        node.addChildren(a, children);
+      }
+    }
 
   }
 
@@ -73,14 +116,17 @@ public class Vfdt extends IncrementalLearner<Integer> {
    */
   @Override
   public double makePrediction(Integer[] example) {
-
-    double prediction = 0;
-
-    /*
-      FILL IN HERE
-    */
-
-    return prediction;
+    VfdtNode node = root.sortExample(example);
+    int[][][] nijk = node.getNijk();
+    int firstFeature = node.getPossibleSplitFeatures()[0];
+    int totalOne = 0;
+    int totalZero = 0;
+    for(int j = 0; j < nijk[0][firstFeature].length ; j++){
+      totalOne += nijk[0][firstFeature][1];
+      totalZero += nijk[0][firstFeature][0];
+    }
+    double prediction = totalOne/(totalZero+totalOne);
+    return prediction*2-1;
   }
 
   /**
