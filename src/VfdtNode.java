@@ -157,8 +157,10 @@ public class VfdtNode {
     for(int i = 0; i < nijk.length; i++){
       for(int j = 0; j < nijk[i].length; j++){
         for(int k = 0; k < nijk[i][j].length; k++){
-          allClassesOfSubSets[allPositions[index-1]][k] += nijk[i][j][k];
-          index += nijk[i][j][k];
+          if(featureId != i){
+            allClassesOfSubSets[allPositions[index-1]][k] += nijk[i][j][k];
+            index += nijk[i][j][k];
+          }
         }
       }
     }
