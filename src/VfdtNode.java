@@ -157,11 +157,8 @@ public class VfdtNode {
     for(int i = 0; i < nijk.length; i++){
       for(int j = 0; j < nijk[i].length; j++){
         for(int k = 0; k < nijk[i][j].length; k++){
-          for(int t = 0; t < nijk[i][j][k]; t++){
-            allClassesOfSubSets[allPositions[index+t]][k] += 1;
-          }
+          allClassesOfSubSets[allPositions[index]][k] += nijk[i][j][k];
           index += nijk[i][j][k];
-          System.out.println("Index: "+ nijk[i][j].length);
         }
       }
     }
