@@ -64,7 +64,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
     // Step 2: check if update is necessary
     // Step 2.1: check size requirement
     int sizeNijk = node.getNijkSize();
-    System.out.println(sizeNijk);
     if(sizeNijk >= nmin){
       // Step 2.2: check Hoeffding bound
       int[] possibleSplitFeatures = node.getPossibleSplitFeatures();
