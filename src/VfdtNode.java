@@ -131,7 +131,6 @@ public class VfdtNode {
       }
     }
     double currentEntropy = calculateEntropy(amountPerClass, totalEx);
-    System.out.println("Entropy: " + currentEntropy);
 
     // Step 2: find all positions of the value of the and all possible values of featureID.
     int[] allPositions = new int[totalEx];
@@ -150,6 +149,8 @@ public class VfdtNode {
         }
       }
     }
+    System.out.println("All values: " + allValues.toString());
+    System.out.println("All positions: " + Arrays.toString(allPositions));
 
     // Step 3: iterate over all nijk and create the nijk of all subsets.
     int[][] allClassesOfSubSets = new int[allValues.size()][amountOfClasses];
