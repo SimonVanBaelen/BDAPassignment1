@@ -41,6 +41,7 @@ public class VfdtNode {
       if (m > maxFeature){
         maxFeature = m;
       }
+    System.out.println("All features: " + Arrays.toString(possibleSplitFeatures));
     }
     nijk = new int[nbFeatureValues.length][maxFeature][2];
   }
@@ -149,8 +150,7 @@ public class VfdtNode {
         }
       }
     }
-    System.out.println("All values: " + allValues.toString());
-    System.out.println("All positions: " + Arrays.toString(allPositions));
+
 
     // Step 3: iterate over all nijk and create the nijk of all subsets.
     int[][] allClassesOfSubSets = new int[allValues.size()][amountOfClasses];
