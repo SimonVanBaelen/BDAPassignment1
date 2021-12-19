@@ -103,9 +103,6 @@ public class VfdtNode {
     if (splitFeature == -1){
       return this;
     }else{
-      for(VfdtNode n:children){
-        System.out.println(n.getNijk()[0].length);
-      }
       return children[example[splitFeature]].sortExample(example);
     }
   }

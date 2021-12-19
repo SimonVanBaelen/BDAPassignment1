@@ -266,6 +266,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         int index = 0;
         for(int id : allNodes[n].getChildIDs()){
           childNodes[index] = allNodes[id];
+          System.out.println(allNodes[id].getNijk()[0].length);
         }
         allNodes[n].addChildren(allNodes[n].getSplitFeature(), childNodes);
       }
