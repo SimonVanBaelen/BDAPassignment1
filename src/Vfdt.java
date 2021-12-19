@@ -235,10 +235,10 @@ public class Vfdt extends IncrementalLearner<Integer> {
         for(int j = 0; j < pf.length; j++){ possibleFeature[j] = Integer.parseInt(pf[j]);}
 
         // Get nijk
-        System.out.println(nodeInfo[3]);
         String[] nijkString = nodeInfo[3].replaceAll("nijk:", "").replace("[","").replace("]","").split(",");
         int maxSizeFeature = Arrays.stream(nbFeatureValues).max().getAsInt();
         int[][][] nijk = new int[nbFeatureValues.length][maxSizeFeature][2];
+        System.out.println(Arrays.toString(nijkString));
         for(int si = 0; si < nijkString.length-1; si++){
           String[] s = nijkString[si].split(":");
           nijk[Integer.parseInt(s[0])][Integer.parseInt(s[1])][Integer.parseInt(s[2])] = Integer.parseInt(s[3]);
