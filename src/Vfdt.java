@@ -240,7 +240,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         // Get all possible features
         String[] pf = nodeInfo[2].replaceAll("pf:", "").replace("[","").replace("]","").split(",");
         int[] possibleFeature = new int[pf.length];
-        for(int j = 0; j < pf.length; j++){ possibleFeature[j] = Integer.parseInt(pf[j]);}
+        for(int j = 0; j < pf.length-1; j++){ possibleFeature[j] = Integer.parseInt(pf[j]);}
 
         // Get nijk
         String[] nijkString = nodeInfo[3].replaceAll("nijk:", "").replace("[","").replace("]","").split(",");
