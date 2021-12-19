@@ -250,7 +250,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         for(int i = 0; i < nijk.length; i++){
           for(int j = 0; j < nijk[i].length; j++){
             for(int k = 0; k < nijk[i][j].length; k++){
-                System.out.println(i + ":" + j + ":" + k + ":" + nijk[i][j][k]);
+                System.out.println(n + ":::" + i + ":" + j + ":" + k + ":" + nijk[i][j][k]);
             }
           }
         }
