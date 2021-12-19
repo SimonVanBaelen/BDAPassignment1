@@ -48,10 +48,12 @@ public class VfdtSanityChecks {
   @Test
   public void readUpdateAndWrite() throws Exception {
     learner.readModel("models/vfdtSanity1.model", 0);
+    System.out.println("Pathmin: " + Files.readString(Paths.get("models/vfdtSanity1.model"), StandardCharsets.US_ASCII));
     learner.update(example1);
     learner.update(example2);
     String path0 = "output/vfdtSanityOut1.model";
     learner.writeModel(path0);
+    System.out.println("Path0: " + Files.readString(Paths.get(path0), StandardCharsets.US_ASCII));
     Vfdt learner2 = new Vfdt(new int[] {3, 3, 2}, 0.05, 0.05, 1);
     learner2.readModel(path0, learner.nbExamplesProcessed);
     System.out.println("///////////////////////////////////");
