@@ -6,6 +6,10 @@ import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.junit.*;
 
 public class VfdtSanityChecks {
@@ -60,8 +64,12 @@ public class VfdtSanityChecks {
     learner2.update(example4);
     String path1 = "output/vfdtSanityOut2.model";
     String path2 = "output/vfdtSanityOut3.model";
+
     learner.writeModel(path1);
     learner2.writeModel(path2);
+
+    System.out.println("Path1: " + Files.readString(Paths.get(path1), StandardCharsets.US_ASCII));
+    System.out.println("Path2: " + Files.readString(Paths.get(path2), StandardCharsets.US_ASCII));
 
     BufferedReader reader1 = new BufferedReader(new FileReader(path1));
     BufferedReader reader2 = new BufferedReader(new FileReader(path2));
