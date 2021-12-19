@@ -91,13 +91,15 @@ public class Vfdt extends IncrementalLearner<Integer> {
         Boolean skipped = false;
         node.setSplitFeature(a);
         int[] possibleFeatures = new int[node.getPossibleSplitFeatures().length-1];
-        for (int i = 0; i < node.getPossibleSplitFeatures().length; i++){
-          if (node.getSplitFeature() != node.getPossibleSplitFeatures()[i]) {
-            if(!skipped){
-              int test = node.getPossibleSplitFeatures()[i];
-              possibleFeatures[i] = test;
-            }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
-          }else{skipped = true;}
+        if (possibleFeatures.length != 0) {
+          for (int i = 0; i < node.getPossibleSplitFeatures().length; i++){
+            if (node.getSplitFeature() != node.getPossibleSplitFeatures()[i]) {
+              if(!skipped){
+                int test = node.getPossibleSplitFeatures()[i];
+                possibleFeatures[i] = test;
+              }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
+            }else{skipped = true;}
+          }
         }
         // Create all child nodes.
         int n = nbFeatureValues[a];
