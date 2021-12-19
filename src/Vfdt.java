@@ -100,6 +100,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
           children[i] = new VfdtNode(this.nbFeatureValues,possibleFeatures);
         }
         node.addChildren(a, children);
+        System.out.println(children.length + " nodes created at feature: " + a);
       }
     }
   }
