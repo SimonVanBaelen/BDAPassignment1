@@ -61,12 +61,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
     // Step 1: add example to right node
     VfdtNode node = root.sortExample(example.attributeValues);
     int[][][] nijk = node.getNijk();
-    node.update(example.classValue);
-    if(example.attributeValues.length > 0){
-      for(int i = 0; i < example.attributeValues.length ; i++){
-        nijk[i][example.attributeValues[i]][example.classValue] += 1;
-      }
-    }
     if(example.attributeValues[0] == 2){
       System.out.println(nijk.length);
       System.out.println(nijk[0].length);
@@ -76,6 +70,13 @@ public class Vfdt extends IncrementalLearner<Integer> {
       System.out.println(nijk[2].length);
       System.out.println(nijk[2][0][0]);
     }
+    node.update(example.classValue);
+    if(example.attributeValues.length > 0){
+      for(int i = 0; i < example.attributeValues.length ; i++){
+        nijk[i][example.attributeValues[i]][example.classValue] += 1;
+      }
+    }
+
     // Step 2: check if update is necessary
     // Step 2.1: check size requirement
     if (node.getPossibleSplitFeatures().length > 0) {
