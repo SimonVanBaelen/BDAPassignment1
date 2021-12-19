@@ -285,7 +285,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     }
     root = allNodes[allNodes.length-1];
     System.out.println(Arrays.toString(allNodes));
-    System.out.println(Arrays.toString(root.getChildIDs()));
+    System.out.println(Arrays.toString(root.getChildren()));
   }
 
 
