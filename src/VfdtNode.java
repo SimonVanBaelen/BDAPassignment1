@@ -42,17 +42,8 @@ public class VfdtNode {
     this.nbFeatureValues = nbFeatureValues;
     splitFeature = -1;
     children = null;
-    int maxFeature = 0;
-    try{
-      for(int m : possibleSplitFeatures){
-        if (m > maxFeature){
-          maxFeature = m;
-        }
-      }
-    }catch(NullPointerException ignored){
-        maxFeature = 5;
-    }
-    nijk = new int[nbFeatureValues.length][maxFeature][2];
+    int maxSizeFeature = Arrays.stream(nbFeatureValues).max().getAsInt();
+    nijk = new int[nbFeatureValues.length][maxSizeFeature][2];
     totalZeros = 0; totalOnes = 0;
   }
 
