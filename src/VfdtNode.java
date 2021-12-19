@@ -94,7 +94,7 @@ public class VfdtNode {
     if (splitFeature == -1){
       return this;
     }else{
-      System.out.println(splitFeature);
+      System.out.println(splitFeature + " && " + id);
       return children[example[splitFeature]].sortExample(example);
     }
   }
