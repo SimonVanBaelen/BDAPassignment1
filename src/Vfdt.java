@@ -260,7 +260,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
           childIDs[i] = Integer.parseInt(c[i]);
         }
         allNodes[n].setChildIDs(childIDs);
-      } root = allNodes[1];
+      } root = allNodes[0];
     }
 
     for(int n = 0; n < allNodes.length; n++){
