@@ -226,12 +226,12 @@ public class Vfdt extends IncrementalLearner<Integer> {
 
       if(nodeInfo[1].equals("L")){
         // Get all possible features
-        String[] pf = content[2].replaceAll("pf:", "").replace("[","").replace("]","").split(",");
+        String[] pf = nodeInfo[2].replaceAll("pf:", "").replace("[","").replace("]","").split(",");
         int[] possibleFeature = new int[pf.length];
         for(int j = 0; j < pf.length; j++){ possibleFeature[j] = Integer.parseInt(pf[j]);}
 
         // Get nijk
-        String[] nijkString = content[3].replaceAll("nijk:", "").replace("[","").replace("]","").split(",");
+        String[] nijkString = nodeInfo[3].replaceAll("nijk:", "").replace("[","").replace("]","").split(",");
         int maxSizeFeature = Arrays.stream(nbFeatureValues).max().getAsInt();
         int[][][] nijk = new int[nbFeatureValues.length][maxSizeFeature][2];
         for(String s1 : nijkString){
@@ -246,10 +246,10 @@ public class Vfdt extends IncrementalLearner<Integer> {
       }else if(nodeInfo[1].equals("D")){
         // Set feature
         allNodes[n] = new VfdtNode(nbFeatureValues, null);
-        int feature = Integer.parseInt(content[2].replaceAll("f:",""));
+        int feature = Integer.parseInt(nodeInfo[2].replaceAll("f:",""));
         allNodes[n].setSplitFeature(feature);
 
-        String[] c = content[3].replaceAll("ch:", "").replace("[","").replace("]","").split(",");
+        String[] c = nodeInfo[3].replaceAll("ch:", "").replace("[","").replace("]","").split(",");
         int[] childIDs = new int[c.length];
         for(int i = 0; i < c.length;i++){
           childIDs[i] = Integer.parseInt(c[i]);
