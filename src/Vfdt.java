@@ -39,7 +39,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     this.delta = delta;
     this.tau = tau;
     this.nmin = nmin;
-    nbSplits = 1;
+    nbSplits = 0;
 
     nbExamplesProcessed = 0;
     int[] possibleFeatures = new int[nbFeatureValues.length];
@@ -285,7 +285,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
       }
     }
     root = allNodes[allNodes.length-1];
-    nbSplits = allNodes.length;
+    nbSplits = allNodes.length-1;
   }
 
 
