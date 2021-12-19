@@ -76,48 +76,50 @@ public class Vfdt extends IncrementalLearner<Integer> {
 
     // Step 2: check if update is necessary
     // Step 2.1: check size requirement
-    int sizeNijk = node.getNijkSize();
-    if(sizeNijk % nmin == 0 && sizeNijk > 0){
-      // Step 2.2: check Hoeffding bound
-      int[] possibleSplitFeatures = node.getPossibleSplitFeatures();
-      double Ga = 0;
-      int a = 0;
-      double Gb = 0;
-      for(int i:possibleSplitFeatures){
-        double G = node.splitEval(i);
-        if(Ga < G){
-          Gb = Ga;
-          Ga = G; a = i;
-        }else if (Gb < G){
-          Gb = G;
-        }
-      }
-      double deltaG = Ga - Gb;
-      double epsilon = sqrt(log(1/tau)/ (2*sizeNijk));
-      if(deltaG < delta || deltaG > epsilon){
-        // Create all possible features for child nodes.
-        Boolean skipped = false;
-        node.setSplitFeature(a);
-        int[] possibleFeatures = new int[node.getPossibleSplitFeatures().length-1];
-        if (possibleFeatures.length != 0) {
-          for (int i = 0; i < node.getPossibleSplitFeatures().length; i++){
-            if (node.getSplitFeature() != node.getPossibleSplitFeatures()[i]) {
-              if(!skipped){
-                int test = node.getPossibleSplitFeatures()[i];
-                possibleFeatures[i] = test;
-              }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
-            }else{skipped = true;}
+    if (node.getPossibleSplitFeatures().length > 0) {
+      int sizeNijk = node.getNijkSize();
+      if(sizeNijk % nmin == 0 && sizeNijk > 0){
+        // Step 2.2: check Hoeffding bound
+        int[] possibleSplitFeatures = node.getPossibleSplitFeatures();
+        double Ga = 0;
+        int a = 0;
+        double Gb = 0;
+        for(int i:possibleSplitFeatures){
+          double G = node.splitEval(i);
+          if(Ga < G){
+            Gb = Ga;
+            Ga = G; a = i;
+          }else if (Gb < G){
+            Gb = G;
           }
         }
-        // Create all child nodes.
-        int n = nbFeatureValues[a];
-        VfdtNode[] children = new VfdtNode[n];
-        for (int i = 0; i < n; i++){
-          children[i] = new VfdtNode(this.nbFeatureValues,possibleFeatures);
+        double deltaG = Ga - Gb;
+        double epsilon = sqrt(log(1/tau)/ (2*sizeNijk));
+        if(deltaG < delta || deltaG > epsilon){
+          // Create all possible features for child nodes.
+          Boolean skipped = false;
+          node.setSplitFeature(a);
+          int[] possibleFeatures = new int[node.getPossibleSplitFeatures().length-1];
+          if (possibleFeatures.length != 0) {
+            for (int i = 0; i < node.getPossibleSplitFeatures().length; i++){
+              if (node.getSplitFeature() != node.getPossibleSplitFeatures()[i]) {
+                if(!skipped){
+                  int test = node.getPossibleSplitFeatures()[i];
+                  possibleFeatures[i] = test;
+                }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
+              }else{skipped = true;}
+            }
+          }
+          // Create all child nodes.
+          int n = nbFeatureValues[a];
+          VfdtNode[] children = new VfdtNode[n];
+          for (int i = 0; i < n; i++){
+            children[i] = new VfdtNode(this.nbFeatureValues,possibleFeatures);
+          }
+          node.addChildren(a, children);
+          nbSplits += children.length;
+          System.out.println(children.length + " nodes created at feature: " + a);
         }
-        node.addChildren(a, children);
-        nbSplits += children.length;
-        System.out.println(children.length + " nodes created at feature: " + a);
       }
     }
   }
