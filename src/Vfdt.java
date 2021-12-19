@@ -217,8 +217,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
     super.readModel(path, nbExamplesProcessed);
     String[] content = Files.readString(Paths.get(path), StandardCharsets.US_ASCII).split(System.lineSeparator());
     String content2 = Files.readString(Paths.get(path), StandardCharsets.US_ASCII);
-    System.out.println("1: " + Arrays.toString(content));
-    System.out.println("2: " + content2);
     VfdtNode[] allNodes = new VfdtNode[content.length-1];
 
     for(int n = 0; n < allNodes.length; n++){
@@ -235,7 +233,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         int maxSizeFeature = Arrays.stream(nbFeatureValues).max().getAsInt();
         int[][][] nijk = new int[nbFeatureValues.length][maxSizeFeature][2];
         for(int si = 0; si < nijkString.length-1; si++){
-          String[] s = nijkString[si].split(",");
+          String[] s = nijkString[si].split(":");
           nijk[Integer.parseInt(s[0])][Integer.parseInt(s[1])][Integer.parseInt(s[2])] = Integer.parseInt(s[3]);
         }
 
