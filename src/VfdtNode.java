@@ -25,6 +25,8 @@ public class VfdtNode {
 
   private int totalZeros;
 
+  private int[] childIDs = null;
+
   /* FILL IN HERE */
 
   /**
@@ -246,5 +248,31 @@ public class VfdtNode {
     }else{
       totalOnes += 1;
     }
+  }
+
+  public VfdtNode[] getChildren() {
+    return children;
+  }
+
+  private int id;
+
+  public void setID(int nbSplits) {
+    id = nbSplits;
+  }
+
+  public int getID() {
+    return id;
+  }
+
+  public void setNijk(int[][][] n) {
+    nijk = n;
+  }
+
+  public void setChildIDs(int[] c) {
+    childIDs = c;
+  }
+
+  public int[] getChildIDs() {
+    return childIDs;
   }
 }

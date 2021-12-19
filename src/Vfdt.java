@@ -3,6 +3,9 @@
  * without permission. Written by Pieter Robberechts, 2021
  */
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     this.delta = delta;
     this.tau = tau;
     this.nmin = nmin;
+    nbSplits = 1;
 
     nbExamplesProcessed = 0;
     int[] possibleFeatures = new int[nbFeatureValues.length];
@@ -100,6 +104,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
           children[i] = new VfdtNode(this.nbFeatureValues,possibleFeatures);
         }
         node.addChildren(a, children);
+        nbSplits += children.length;
         System.out.println(children.length + " nodes created at feature: " + a);
       }
     }
@@ -127,6 +132,9 @@ public class Vfdt extends IncrementalLearner<Integer> {
     return prediction*2-1;
   }
 
+
+  private String[] helperList;
+
   /**
    * Writes the current model to a file.
    *
@@ -139,11 +147,59 @@ public class Vfdt extends IncrementalLearner<Integer> {
    */
   @Override
   public void writeModel(String path) throws IOException {
-    /*
-      FILL IN HERE
-    */
+    helperList = new String[nbSplits];
+    int backup = nbSplits;
+    getNodeStrings(root);
+    nbSplits = backup;
+    File modelFile = new File(path);
+    modelFile.createNewFile();
+
+    StringBuilder model = new StringBuilder(backup);
+    for (String s : helperList){
+      model.append(System.lineSeparator()).append(s);
+    }
+
+    FileWriter writer = new FileWriter(path);
+    writer.write(model.toString());
+    writer.close();
   }
 
+  private void getNodeStrings(VfdtNode node){
+    StringBuilder nodeInfo;
+    VfdtNode[] children = node.getChildren();
+    if(children != null){
+      nbSplits--;
+      node.setID(nbSplits);
+      for(VfdtNode n : node.getChildren()){
+        getNodeStrings(n);
+      }
+      nodeInfo = new StringBuilder(node.getID() + " D f:" + node.getSplitFeature() + " ch:[");
+      for(VfdtNode n : children){
+        nodeInfo.append(n.getID()).append(",");
+      }
+      nodeInfo.append("]");
+      helperList[node.getID()] = nodeInfo.toString();
+    }else{
+      nbSplits--;
+      node.setID(nbSplits);
+      nodeInfo = new StringBuilder(node.getID() + " L pf:[");
+      for(int i : node.getPossibleSplitFeatures()){
+        nodeInfo.append(i).append(",");
+      }
+      nodeInfo.append("] nijk:[");
+      int[][][] nijk = node.getNijk();
+      for(int i = 0; i < nijk.length; i++){
+        for(int j = 0; j < nijk[i].length; j++){
+          for(int k = 0; k < nijk[i][j].length; k++){
+            if(nijk[i][j][k] != 0){
+              nodeInfo.append(i).append(":").append(j).append(":").append(k).append(":").append(nijk[i][j][k]).append(",");
+            }
+          }
+        }
+      }nodeInfo.append("]");
+      helperList[node.getID()] = nodeInfo.toString();
+    }
+  }
 
   /**
    * Reads in the model in the file and sets it as the current model. Sets the number of examples
@@ -159,8 +215,56 @@ public class Vfdt extends IncrementalLearner<Integer> {
   @Override
   public void readModel(String path, int nbExamplesProcessed) throws IOException {
     super.readModel(path, nbExamplesProcessed);
+    String[] content = Files.readString(Paths.get(path), StandardCharsets.US_ASCII).split(System.lineSeparator());
+    VfdtNode[] allNodes = new VfdtNode[content.length-1];
 
-    /* FILL IN HERE */
+    for(int n = 0; n < allNodes.length; n++){
+      String[] nodeInfo = content[n+1].split(" ");
+
+      if(nodeInfo[1].equals("L")){
+        // Get all possible features
+        String[] pf = content[2].replaceAll("pf:", "").replace("[","").replace("]","").split(",");
+        int[] possibleFeature = new int[pf.length];
+        for(int j = 0; j < pf.length; j++){ possibleFeature[j] = Integer.parseInt(pf[j]);}
+
+        // Get nijk
+        String[] nijkString = content[3].replaceAll("nijk:", "").replace("[","").replace("]","").split(",");
+        int maxSizeFeature = Arrays.stream(nbFeatureValues).max().getAsInt();
+        int[][][] nijk = new int[nbFeatureValues.length][maxSizeFeature][2];
+        for(String s1 : nijkString){
+          String[] s = s1.split(",");
+          nijk[Integer.parseInt(s[0])][Integer.parseInt(s[1])][Integer.parseInt(s[2])] = Integer.parseInt(s[3]);
+        }
+
+        // Put node in list
+        allNodes[n] = new VfdtNode(nbFeatureValues, possibleFeature);
+        allNodes[n].setID(Integer.parseInt(nodeInfo[0]));
+        allNodes[n].setNijk(nijk);
+      }else if(nodeInfo[1].equals("D")){
+        // Set feature
+        allNodes[n] = new VfdtNode(nbFeatureValues, null);
+        int feature = Integer.parseInt(content[2].replaceAll("f:",""));
+        allNodes[n].setSplitFeature(feature);
+
+        String[] c = content[3].replaceAll("ch:", "").replace("[","").replace("]","").split(",");
+        int[] childIDs = new int[c.length];
+        for(int i = 0; i < c.length;i++){
+          childIDs[i] = Integer.parseInt(c[i]);
+        }
+        allNodes[n].setChildIDs(childIDs);
+      }
+    }
+
+    for(int n = 0; n < allNodes.length; n++){
+      if(allNodes[n].getChildIDs() != null){
+        VfdtNode[] childNodes = new VfdtNode[allNodes[n].getChildIDs().length];
+        int index = 0;
+        for(int id : allNodes[n].getChildIDs()){
+          childNodes[index] = allNodes[id];
+        }
+        allNodes[n].addChildren(allNodes[n].getSplitFeature(), childNodes);
+      }
+    }
   }
 
 
