@@ -66,9 +66,9 @@ public class Vfdt extends IncrementalLearner<Integer> {
       try{
         nijk[i][example.attributeValues[i]][example.classValue] += 1;
       }catch(ArrayIndexOutOfBoundsException e){
-        System.out.println(i);
-        System.out.println(example.attributeValues[i]);
-        System.out.println(example.classValue);
+        System.out.println(nijk.length + " ///// " + i);
+        System.out.println(nijk[i].length + " ///// " +example.attributeValues[i]);
+        System.out.println(nijk[i][0].length + " ///// " +example.classValue);
       }
 
     }
