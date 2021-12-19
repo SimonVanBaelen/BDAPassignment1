@@ -45,8 +45,8 @@ public class VfdtSanityChecks {
   public void readUpdateAndWrite() throws Exception {
     learner.readModel("models/vfdtSanity1.model", 0);
     learner.update(example1);
-    learner.update(example2);
     System.out.println("///////////////////////////////////////////////////////////////////////////////////////");
+    learner.update(example2);
     String path0 = "output/vfdtSanityOut1.model";
     learner.writeModel(path0);
     Vfdt learner2 = new Vfdt(new int[] {3, 3, 2}, 0.05, 0.05, 1);
