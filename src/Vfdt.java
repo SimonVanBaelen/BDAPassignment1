@@ -64,7 +64,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     node.update(example.classValue);
     if(example.attributeValues.length > 0){
       for(int i = 0; i < example.attributeValues.length ; i++){
-        //nijk[i][example.attributeValues[i]][example.classValue] += 1;
+        nijk[i][example.attributeValues[i]][example.classValue] += 1;
       }
     }
     if(example.attributeValues[0] == 2){
