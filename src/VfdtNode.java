@@ -43,9 +43,11 @@ public class VfdtNode {
     splitFeature = -1;
     children = null;
     int maxFeature = 0;
-    for(int m : possibleSplitFeatures){
-      if (m > maxFeature){
-        maxFeature = m;
+    if (possibleSplitFeatures != null) {
+      for(int m : possibleSplitFeatures){
+        if (m > maxFeature){
+          maxFeature = m;
+        }
       }
     }
     nijk = new int[nbFeatureValues.length][maxFeature][2];
