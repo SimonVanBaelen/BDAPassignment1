@@ -259,6 +259,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
           childIDs[i] = Integer.parseInt(c[i]);
         }
         allNodes[n].setChildIDs(childIDs);
+        System.out.println(Arrays.toString(childIDs));
       }
     }
 
