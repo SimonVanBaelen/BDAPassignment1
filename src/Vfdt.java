@@ -223,7 +223,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
   public void readModel(String path, int nbExamplesProcessed) throws IOException {
     super.readModel(path, nbExamplesProcessed);
     String[] content = Files.readString(Paths.get(path), StandardCharsets.US_ASCII).split(System.lineSeparator());
-    String content2 = Files.readString(Paths.get(path), StandardCharsets.US_ASCII);
+    System.out.println(content);
     VfdtNode[] allNodes = new VfdtNode[content.length-1];
 
     for(int n = 0; n < allNodes.length; n++){
@@ -231,12 +231,9 @@ public class Vfdt extends IncrementalLearner<Integer> {
 
       if(nodeInfo[1].equals("L")){
         // Get all possible features
-        System.out.println("Nodeinfo: " + nodeInfo[2]);
         String[] pf = nodeInfo[2].replaceAll("pf:", "").replace("[","").replace("]","").split(",");
-        System.out.println("Features: " + Arrays.toString(pf));
         int[] possibleFeature = new int[pf.length];
         for(int j = 0; j < pf.length; j++){ possibleFeature[j] = Integer.parseInt(pf[j]);}
-        System.out.println(Arrays.toString(possibleFeature));
 
         // Get nijk
         String[] nijkString = nodeInfo[3].replaceAll("nijk:", "").replace("[","").replace("]","").split(",");
