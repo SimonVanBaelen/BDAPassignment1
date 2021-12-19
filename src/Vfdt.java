@@ -234,8 +234,8 @@ public class Vfdt extends IncrementalLearner<Integer> {
         System.out.println("Nodeinfo: " + nodeInfo[2]);
         String[] pf = nodeInfo[2].replaceAll("pf:", "").replace("[","").replace("]","").split(",");
         System.out.println("Features: " + Arrays.toString(pf));
-        int[] possibleFeature = new int[pf.length-1];
-        for(int j = 0; j < pf.length-1; j++){ possibleFeature[j] = Integer.parseInt(pf[j]);}
+        int[] possibleFeature = new int[pf.length];
+        for(int j = 0; j < pf.length; j++){ possibleFeature[j] = Integer.parseInt(pf[j]);}
         System.out.println(Arrays.toString(possibleFeature));
 
         // Get nijk
