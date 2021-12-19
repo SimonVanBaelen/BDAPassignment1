@@ -94,7 +94,6 @@ public class VfdtNode {
     if (children.length == 0){
       return this;
     }else{
-      System.out.println(Arrays.toString(children));
       return children[example[splitFeature]].sortExample(example);
     }
   }
