@@ -73,7 +73,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
 
       }
     }
-
+    System.out.println(nijk[2][1][0]);
     // Step 2: check if update is necessary
     // Step 2.1: check size requirement
     if (node.getPossibleSplitFeatures().length > 0) {
