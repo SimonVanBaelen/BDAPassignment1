@@ -127,7 +127,7 @@ public class VfdtNode {
     double ig = 0;
 
     // Step 1: find amount of examples and amount belonging to class c.
-    int totalEx = 0;
+    double totalEx = 0;
     int amountOfClasses = nijk[0][0].length;
     double[] amountPerClass = new double[amountOfClasses];
     for(int j = 0; j < nijk[featureId].length; j++){
