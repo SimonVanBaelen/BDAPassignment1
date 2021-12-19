@@ -70,7 +70,11 @@ public class Vfdt extends IncrementalLearner<Integer> {
     if(example.attributeValues[0] == 2){
       System.out.println(nijk.length);
       System.out.println(nijk[0].length);
-      System.out.println(nijk[0][2].length);
+      System.out.println(nijk[0][2][0]);
+      System.out.println(nijk[1].length);
+      System.out.println(nijk[1][1][0]);
+      System.out.println(nijk[2].length);
+      System.out.println(nijk[2][0][0]);
     }
     // Step 2: check if update is necessary
     // Step 2.1: check size requirement
