@@ -42,7 +42,6 @@ public class VfdtNode {
     this.nbFeatureValues = nbFeatureValues;
     splitFeature = -1;
     children = null;
-    System.out.println(Arrays.toString(possibleSplitFeatures));
     int maxFeature = 0;
     try{
       for(int m : possibleSplitFeatures){
