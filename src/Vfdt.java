@@ -241,7 +241,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         System.out.println(Arrays.toString(nijkString));
         for(int si = 0; si < nijkString.length; si++){
           String[] s = nijkString[si].split(":");
-          System.out.println("S: " + nijkString.length);
+          System.out.println("S: " + s.length);
           nijk[Integer.parseInt(s[0])][Integer.parseInt(s[1])][Integer.parseInt(s[2])] = Integer.parseInt(s[3]);
         }
 
