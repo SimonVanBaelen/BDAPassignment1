@@ -51,7 +51,7 @@ public class VfdtNode {
         }
       }
     }catch(NullPointerException ignored){
-
+        maxFeature = 5;
     }
     nijk = new int[nbFeatureValues.length][maxFeature][2];
     totalZeros = 0; totalOnes = 0;
