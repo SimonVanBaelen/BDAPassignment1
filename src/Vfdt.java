@@ -250,13 +250,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
         allNodes[n] = new VfdtNode(nbFeatureValues, possibleFeature);
         allNodes[n].setID(Integer.parseInt(nodeInfo[0]));
         allNodes[n].setNijk(nijk);
-        for(int i = 0; i < nijk.length; i++){
-          for(int j = 0; j < nijk[i].length; j++){
-            for(int k = 0; k < nijk[i][j].length; k++){
-                System.out.println(n + ":::" + i + ":" + j + ":" + k + ":" + nijk[i][j][k]);
-            }
-          }
-        }
       }else if(nodeInfo[1].equals("D")){
         // Set feature
         allNodes[n] = new VfdtNode(nbFeatureValues, null);
