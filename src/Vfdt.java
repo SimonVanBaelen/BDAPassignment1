@@ -247,6 +247,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         allNodes[n] = new VfdtNode(nbFeatureValues, possibleFeature);
         allNodes[n].setID(Integer.parseInt(nodeInfo[0]));
         allNodes[n].setNijk(nijk);
+        System.out.println(Arrays.toString(nijk));
       }else if(nodeInfo[1].equals("D")){
         // Set feature
         allNodes[n] = new VfdtNode(nbFeatureValues, null);
@@ -259,7 +260,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
           childIDs[i] = Integer.parseInt(c[i]);
         }
         allNodes[n].setChildIDs(childIDs);
-        System.out.println(Arrays.toString(childIDs));
+
       }
     }
 
