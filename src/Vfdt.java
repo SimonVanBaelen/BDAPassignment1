@@ -82,9 +82,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
       }
       double deltaG = Ga - Gb;
       double epsilon = sqrt(log(2/tau)/ (2*sizeNijk));
-      System.out.println("Size: " + sizeNijk);
-      System.out.println("Delta = " + deltaG);
-      System.out.println("Epsilon: " + epsilon);
       if(deltaG < delta && deltaG > epsilon){
         // Create all possible features for child nodes.
         Boolean skipped = false;
