@@ -91,7 +91,7 @@ public class VfdtNode {
    * @param example is the test attributeValues to sort.
    */
   public VfdtNode sortExample(Integer[] example) {
-    if (splitFeature == -1){
+    if (children.length == 0){
       return this;
     }else{
       return children[example[splitFeature]].sortExample(example);
