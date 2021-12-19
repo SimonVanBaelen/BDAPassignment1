@@ -174,7 +174,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
   private void getNodeStrings(VfdtNode node){
     StringBuilder nodeInfo;
     VfdtNode[] children = node.getChildren();
-    System.out.println("Number: " + nbSplits);
     if(children != null){
       nbSplits--;
       node.setID(nbSplits);
