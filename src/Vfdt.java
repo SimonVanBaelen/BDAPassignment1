@@ -67,7 +67,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         nijk[i][example.attributeValues[i]][example.classValue] += 1;
       }catch(ArrayIndexOutOfBoundsException e){
         System.out.println(nijk.length + " ///// " + i);
-        System.out.println(nijk[i].length + " ///// " +example.attributeValues[i]);
+        System.out.println(nijk[i].length + " ///// " +example.attributeValues[i] + " //// " + max);
         System.out.println(nijk[i][0].length + " ///// " +example.classValue);
       }
 
@@ -207,7 +207,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
       helperList[node.getID()] = nodeInfo.toString();
     }
   }
-
+  private int max;
   /**
    * Reads in the model in the file and sets it as the current model. Sets the number of examples
    * processed.
@@ -238,6 +238,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         // Get nijk
         String[] nijkString = nodeInfo[3].replaceAll("nijk:", "").replace("[","").replace("]","").split(",");
         int maxSizeFeature = Arrays.stream(nbFeatureValues).max().getAsInt();
+        max = maxSizeFeature;
         int[][][] nijk = new int[nbFeatureValues.length][maxSizeFeature][2];
         for(int si = 0; si < nijkString.length-1; si++){
           String[] s = nijkString[si].split(":");
