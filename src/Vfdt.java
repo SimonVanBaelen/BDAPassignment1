@@ -232,6 +232,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
       if(nodeInfo[1].equals("L")){
         // Get all possible features
         String[] pf = nodeInfo[2].replaceAll("pf:", "").replace("[","").replace("]","").split(",");
+        System.out.println("NodeInfo: "+nodeInfo[2]);
         int[] possibleFeature = new int[pf.length];
         for(int j = 0; j < pf.length; j++){ possibleFeature[j] = Integer.parseInt(pf[j]);}
 
