@@ -103,9 +103,9 @@ public class Vfdt extends IncrementalLearner<Integer> {
           children[i] = new VfdtNode(this.nbFeatureValues,possibleFeatures);
         }
         node.addChildren(a, children);
+        throw new IllegalArgumentException("");
       }
     }
-    throw new IllegalArgumentException("");
   }
 
 
