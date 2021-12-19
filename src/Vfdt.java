@@ -68,20 +68,21 @@ public class Vfdt extends IncrementalLearner<Integer> {
     if(sizeNijk % nmin == 0 && sizeNijk > 0){
       // Step 2.2: check Hoeffding bound
       int[] possibleSplitFeatures = node.getPossibleSplitFeatures();
-      double Ga = 0;
-      int a = 0;
-      double Gb = 0;
-      int b = 0;
-      for(int i:possibleSplitFeatures){
-        double G = node.splitEval(i);
-        if(Ga < G){
-          Gb = Ga; b = a;
-          Ga = G; a = i;
-        }else if (Gb < G){
-          Gb = G; b = i;
-        }
-      }
-      double deltaG = Ga - Gb;
+//      double Ga = 0;
+//      int a = 0;
+//      double Gb = 0;
+//      int b = 0;
+//      for(int i:possibleSplitFeatures){
+//        double G = node.splitEval(i);
+//        if(Ga < G){
+//          Gb = Ga; b = a;
+//          Ga = G; a = i;
+//        }else if (Gb < G){
+//          Gb = G; b = i;
+//        }
+//      }
+//      double deltaG = Ga - Gb;
+      double deltaG = node.splitEval(possibleSplitFeatures[0])- node.splitEval(possibleSplitFeatures[1]);
       double epsilon = sqrt(log(2/tau)/ (2*sizeNijk));
       if(deltaG < delta && deltaG > epsilon){
         // Create all possible features for child nodes.
