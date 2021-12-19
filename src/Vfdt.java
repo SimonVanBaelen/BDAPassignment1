@@ -275,6 +275,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         }
         allNodes[n].addChildren(allNodes[n].getSplitFeature(), childNodes);
       }
+      allNodes[n].setID(n);
     }
     root = allNodes[allNodes.length-1];
     nbSplits = allNodes.length;

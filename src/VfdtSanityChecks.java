@@ -50,6 +50,7 @@ public class VfdtSanityChecks {
     learner.writeModel(path0);
     Vfdt learner2 = new Vfdt(new int[] {3, 3, 2}, 0.05, 0.05, 1);
     learner2.readModel(path0, learner.nbExamplesProcessed);
+    System.out.println("///////////////////////////////////");
     learner.update(example3);
     System.out.println("///////////////////////////////////");
     learner2.update(example3);
