@@ -216,6 +216,9 @@ public class Vfdt extends IncrementalLearner<Integer> {
   public void readModel(String path, int nbExamplesProcessed) throws IOException {
     super.readModel(path, nbExamplesProcessed);
     String[] content = Files.readString(Paths.get(path), StandardCharsets.US_ASCII).split(System.lineSeparator());
+    String content2 = Files.readString(Paths.get(path), StandardCharsets.US_ASCII);
+    System.out.println("1: " + Arrays.toString(content));
+    System.out.println("2: " + content2);
     VfdtNode[] allNodes = new VfdtNode[content.length-1];
 
     for(int n = 0; n < allNodes.length; n++){
