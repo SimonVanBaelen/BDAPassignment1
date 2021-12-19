@@ -232,6 +232,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
         String[] nijkString = nodeInfo[3].replaceAll("nijk:", "").replace("[","").replace("]","").split(",");
         int maxSizeFeature = Arrays.stream(nbFeatureValues).max().getAsInt();
         System.out.println(" MAX = " + maxSizeFeature);
+        System.out.println(" i = " + nbFeatureValues.length);
         int[][][] nijk = new int[nbFeatureValues.length][maxSizeFeature][2];
         for(int si = 0; si < nijkString.length-1; si++){
           String[] s = nijkString[si].split(":");
