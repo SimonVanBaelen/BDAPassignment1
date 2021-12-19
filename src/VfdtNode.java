@@ -21,6 +21,10 @@ public class VfdtNode {
 
   private int[] nbFeatureValues;
 
+  private int totalOnes;
+
+  private int totalZeros;
+
   /* FILL IN HERE */
 
   /**
@@ -43,6 +47,7 @@ public class VfdtNode {
       }
     }
     nijk = new int[nbFeatureValues.length][maxFeature][2];
+    totalZeros = 0; totalOnes = 0;
   }
 
   public int[][][] getNijk(){
@@ -225,5 +230,21 @@ public class VfdtNode {
 
   public int getSplitFeature() {
     return splitFeature;
+  }
+
+  public double getTotalOnes() {
+    return totalOnes;
+  }
+
+  public double getTotalZeros() {
+    return totalZeros;
+  }
+
+  public void update(int c) {
+    if(c == 0){
+      totalZeros += 1;
+    }else{
+      totalOnes += 1;
+    }
   }
 }

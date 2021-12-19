@@ -57,6 +57,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     // Step 1: add example to right node
     VfdtNode node = root.sortExample(example.attributeValues);
     int[][][] nijk = node.getNijk();
+    node.update(example.classValue);
     for(int i = 0; i < example.attributeValues.length ; i++){
         nijk[i][example.attributeValues[i]][example.classValue] += 1;
     }
@@ -64,7 +65,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     // Step 2: check if update is necessary
     // Step 2.1: check size requirement
     int sizeNijk = node.getNijkSize();
-    if(sizeNijk % nmin == 0){
+    if(sizeNijk % nmin == 0 && sizeNijk > 0){
       // Step 2.2: check Hoeffding bound
       int[] possibleSplitFeatures = node.getPossibleSplitFeatures();
       double Ga = 0;
@@ -117,14 +118,8 @@ public class Vfdt extends IncrementalLearner<Integer> {
   @Override
   public double makePrediction(Integer[] example) {
     VfdtNode node = root.sortExample(example);
-    int[][][] nijk = node.getNijk();
-    int firstFeature = node.getPossibleSplitFeatures()[0];
-    double totalOne = 0;
-    double totalZero = 0;
-    for(int j = 0; j < nijk[0][firstFeature].length ; j++){
-      totalOne += nijk[0][firstFeature][1];
-      totalZero += nijk[0][firstFeature][0];
-    }
+    double totalOne = node.getTotalOnes();
+    double totalZero = node.getTotalZeros();
     double prediction = 0;
     if(totalOne != 0 && totalZero != 0){
       prediction = totalOne/(totalZero+totalOne);
