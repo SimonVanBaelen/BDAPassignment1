@@ -158,6 +158,9 @@ public class VfdtNode {
       entropySubsets += cei*(amountSubset/totalEx);
     }
     ig = currentEntropy - entropySubsets;
+    if(featureId == 1){
+      System.out.println("INDEX 1 BE LIKE: " + ig);
+    }
     return ig;
   }
 

@@ -83,9 +83,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
           double Gb = 0;
           for(int i:possibleSplitFeatures){
             double G = node.splitEval(i);
-            if(nbExamplesProcessed < 500){
-              System.out.println("index: " + i + " value: " + G);
-            }
             if(Ga < G){
               Gb = Ga;
               Ga = G; a = i;
