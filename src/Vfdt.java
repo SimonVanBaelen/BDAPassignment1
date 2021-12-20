@@ -104,10 +104,17 @@ public class Vfdt extends IncrementalLearner<Integer> {
           int[] possibleFeatures = new int[node.getPossibleSplitFeatures().length-1];
           if (possibleFeatures.length != 0) {
             for (int i = 0; i < node.getPossibleSplitFeatures().length; i++){
-              if (node.getSplitFeature() != node.getPossibleSplitFeatures()[i]) {
+              if (a != node.getPossibleSplitFeatures()[i]) {
                 if(!skipped){
                   int test = node.getPossibleSplitFeatures()[i];
-                  possibleFeatures[i] = test;
+                  try{
+                    possibleFeatures[i] = test;
+                  }catch (Exception e){
+                    System.out.println("A: " + a);
+                    System.out.println("index: " + i);
+                    throw new IllegalArgumentException();
+                  }
+
                 }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
               }else{skipped = true;}
             }
@@ -142,7 +149,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
     double totalZero = node.getTotalZeros();
     double prediction = 0;
     if(totalOne != 0 && totalZero != 0){
-      System.out.println("Komt hier");
       prediction = totalOne/(totalZero+totalOne);
       return prediction;
     }else if(totalOne != 0){
