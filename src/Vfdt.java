@@ -96,7 +96,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
           deltaG = node.splitEval(a);
         }
         System.out.println("DeltaG: " + deltaG);
-        double epsilon = sqrt(log(2/tau)/ (2*sizeNijk));
+        double epsilon = sqrt(log(1/tau)/ (2*sizeNijk));
         System.out.println("epsilon: " + epsilon);
         if(deltaG < delta || deltaG > epsilon){
           // Create all possible features for child nodes.
@@ -122,6 +122,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
           nbSplits += children.length;
           System.out.println(node.getChildren().length + " nodes created at feature: " + a + "with NBsplits: " + nbSplits);
         }
+        throw new IllegalArgumentException();
       }
     }
   }

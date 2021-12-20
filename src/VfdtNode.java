@@ -179,9 +179,9 @@ public class VfdtNode {
         amountSubset += allClassesOfSubSets[i][o];
       }
       double cei = calculateEntropy(allClassesOfSubSets[i], amountSubset);
-      entropySubsets -= cei*(amountSubset/totalEx);
+      entropySubsets += cei*(amountSubset/totalEx);
     }
-    ig = currentEntropy + entropySubsets;
+    ig = currentEntropy - entropySubsets;
     return ig;
   }
 
