@@ -112,6 +112,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
                     System.out.println("Feature: " + a);
                     System.out.println("AmountOfFeatures " + possibleFeatures.length);
                     System.out.println("All possible features " + Arrays.toString(node.getPossibleSplitFeatures()));
+                    System.out.println("Information gain " + deltaG);
                     throw new IllegalArgumentException();
                   }
                 }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
