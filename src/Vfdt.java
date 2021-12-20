@@ -142,7 +142,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     double totalZero = node.getTotalZeros();
     double prediction = 0;
     System.out.println("ONES: " + totalOne);
-    System.out.println("ZEROS: " + totalOne);
+    System.out.println("ZEROS: " + totalZero);
     if(totalOne != 0 && totalZero != 0){
       prediction = totalOne/(totalZero+totalOne);
       return prediction;
