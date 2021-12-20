@@ -82,10 +82,7 @@ public class Perceptron extends IncrementalLearner<Double> {
     for (int i = 1; i < weights.length; i++){
       pr += example[i-1]*weights[i];
     }
-    //pr = (pr-1)/2; // z = (x-min)/(max-min) <=> x = z*(max-min)+min
-    //TODO dit testen
-//    System.out.println(pr);
-    return 2*pr-1;
+    return pr;
   }
 
   /**
