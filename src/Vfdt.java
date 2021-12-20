@@ -146,6 +146,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     }else if(totalOne != 0){
       prediction = 1;
     }else if(totalZero != 0){
+      System.out.println("Komt hier");
       prediction = -1;
     }else{
       prediction = 0;
