@@ -175,7 +175,7 @@ public class VfdtNode {
     // Step 4: calculate information gain
 //    double currentEntropy = calculateEntropy(amountPerClass, totalEx);
     double entropySubsets = 0;
-    for (int i = 0; i < amountPerClass.length; i++){
+    for (int i = 0; i < allClassesOfSubSets.length; i++){
       int amountSubset = 0;
       for(int o = 0; o < allClassesOfSubSets[i].length; o++){
         amountSubset += allClassesOfSubSets[i][o];
