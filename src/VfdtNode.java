@@ -166,7 +166,7 @@ public class VfdtNode {
     System.out.println("///////////////////////////////////////////////////////////////////////");
     for (int i = 0; i < amountPerClass.length; i++){
       double pi = amountPerClass[i]/S;
-      System.out.println(amountPerClass[i]);
+      System.out.println(S);
       if(pi != 0){
         ce -= pi* (log(pi)/log(2));
       }
