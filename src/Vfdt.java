@@ -78,9 +78,9 @@ public class Vfdt extends IncrementalLearner<Integer> {
         // Step 2.2: check Hoeffding bound
         if(node.getPossibleSplitFeatures().length > 1){
           int[] possibleSplitFeatures = node.getPossibleSplitFeatures();
-          double Ga = 0;
+          double Ga = -1;
           a = 0;
-          double Gb = 0;
+          double Gb = -1;
           for(int i:possibleSplitFeatures){
             double G = node.splitEval(i);
             if(Ga < G){
