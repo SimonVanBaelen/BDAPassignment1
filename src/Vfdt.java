@@ -119,7 +119,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
           }
           node.addChildren(a, children);
           nbSplits += children.length;
-          System.out.println(node.getChildren().length + " nodes created at feature: " + a + "with NBsplits: " + nbSplits);
         }
       }
     }
