@@ -165,6 +165,8 @@ public class VfdtNode {
           allClassesOfSubSets[j][k] += nijk[featureId][j][k];
 //          index += nijk[featureId][j][k];
         }
+      } if(featureId == 190){
+        System.out.println("Feature 190 was " + j + " met volgende klasses: " + Arrays.toString(allClassesOfSubSets[j]));
       }
     }
 
