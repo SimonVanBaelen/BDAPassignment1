@@ -181,12 +181,12 @@ public class VfdtNode {
         amountSubset += allClassesOfSubSets[i][o];
       }
       double cei = calculateEntropy(allClassesOfSubSets[i], amountSubset);
+      if(featureId == 190){
+        System.out.println("Value" + i + " ; " +cei);
+      }
       entropySubsets += cei*(amountSubset/totalEx);
     }
     ig = currentEntropy - entropySubsets;
-    if(featureId == 190){
-      System.out.println(currentEntropy);
-    }
     return ig;
   }
 
