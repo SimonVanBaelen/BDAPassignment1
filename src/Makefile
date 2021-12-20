@@ -28,7 +28,7 @@ ETA=0.00001
 
 # Parameters for VFDT
 DELTA=0.0000001
-TAU=0.05
+TAU=0.20
 NMIN=200
 
 # Experiment parameters
