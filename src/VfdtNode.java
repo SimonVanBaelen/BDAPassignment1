@@ -184,6 +184,9 @@ public class VfdtNode {
       entropySubsets += cei*(amountSubset/totalEx);
     }
     ig = currentEntropy - entropySubsets;
+    if(featureId == 190){
+      System.out.println(ig);
+    }
     return ig;
   }
 
