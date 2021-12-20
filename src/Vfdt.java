@@ -144,15 +144,15 @@ public class Vfdt extends IncrementalLearner<Integer> {
     if(totalOne != 0 && totalZero != 0){
       System.out.println("Komt hier");
       prediction = totalOne/(totalZero+totalOne);
-      return prediction*2-1;
+      return prediction;
     }else if(totalOne != 0){
       prediction = 1;
       return prediction;
     }else if(totalZero != 0){
-      prediction = -1;
+      prediction = 0;
       return prediction;
     }else{
-      prediction = 0;
+      prediction = 0.5;
       return prediction;
     }
   }
