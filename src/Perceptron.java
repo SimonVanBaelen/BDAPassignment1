@@ -49,14 +49,14 @@ public class Perceptron extends IncrementalLearner<Double> {
   @Override
   public void update(Example<Double> example) {
     super.update(example);
-    double prediction = makePrediction(example.attributeValues);
-    double error = example.classValue*2-1 - prediction; //TODO
+    double prediction = (makePrediction(example.attributeValues) > 0) ? 1:0;
+    double error = prediction - example.classValue; //TODO
 //    System.out.println("NB: " + nbExamplesProcessed + " error: " +error);
-    weights[0] += learningRate*error;
+    weights[0] -= learningRate*error;
     for (int i = 1; i < weights.length; i++) {
        double xi = example.attributeValues[i-1];
-       double delta = error * xi * sqrt(learningRate);
-       weights[i] += delta;
+       double delta = error * xi * learningRate;
+       weights[i] -= delta;
     }
 
 //    System.out.println("Epoch: " + nbExamplesProcessed + " error: " + makePrediction(example.attributeValues));
