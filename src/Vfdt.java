@@ -92,11 +92,12 @@ public class Vfdt extends IncrementalLearner<Integer> {
           }
           deltaG = Ga - Gb;
         }else{
+          Ga = 1;
           a = node.getPossibleSplitFeatures()[0];
           deltaG = node.splitEval(a);
         }
         double epsilon = sqrt(log(1/delta)/ (2*sizeNijk));
-        if(epsilon < tau || deltaG > epsilon){
+        if((epsilon < tau || deltaG > epsilon) && Ga > 0){
           // Create all possible features for child nodes.
           Boolean skipped = false;
           node.setSplitFeature(a);
@@ -105,16 +106,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
             for (int i = 0; i < node.getPossibleSplitFeatures().length; i++){
               if (a != node.getPossibleSplitFeatures()[i]) {
                 if(!skipped){
-                  try{
                     possibleFeatures[i] = node.getPossibleSplitFeatures()[i];
-                  }catch(IndexOutOfBoundsException e){
-                    System.out.println("INDEX: " + i);
-                    System.out.println("Feature: " + a);
-                    System.out.println("AmountOfFeatures " + possibleFeatures.length);
-                    System.out.println("All possible features " + Arrays.toString(node.getPossibleSplitFeatures()));
-                    System.out.println("Information gain " + Ga);
-                    throw new IllegalArgumentException();
-                  }
                 }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
               }else{skipped = true;}
             }
