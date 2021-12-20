@@ -106,15 +106,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
             for (int i = 0; i < node.getPossibleSplitFeatures().length; i++){
               if (a != node.getPossibleSplitFeatures()[i]) {
                 if(!skipped){
-                  int test = node.getPossibleSplitFeatures()[i];
-                  try{
-                    possibleFeatures[i] = test;
-                  }catch (Exception e){
-                    System.out.println("A: " + a);
-                    System.out.println("index: " + i);
-                    throw new IllegalArgumentException();
-                  }
-
+                  possibleFeatures[i] = node.getPossibleSplitFeatures()[i];
                 }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
               }else{skipped = true;}
             }
@@ -127,6 +119,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
           }
           node.addChildren(a, children);
           nbSplits += children.length;
+          System.out.println(node.getChildren().length + " nodes created at feature: " + a + "with NBsplits: " + nbSplits);
         }
       }
     }
