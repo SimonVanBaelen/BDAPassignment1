@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.sqrt;
 
 /** This class is a stub for incrementally building a Perceptron model. */
 public class Perceptron extends IncrementalLearner<Double> {
@@ -54,7 +55,7 @@ public class Perceptron extends IncrementalLearner<Double> {
     weights[0] += learningRate*error;
     for (int i = 1; i < weights.length; i++) {
        double xi = example.attributeValues[i-1];
-       double delta = error * xi * learningRate;
+       double delta = error * xi * sqrt(learningRate);
        weights[i] += delta;
     }
 
