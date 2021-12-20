@@ -105,7 +105,14 @@ public class Vfdt extends IncrementalLearner<Integer> {
             for (int i = 0; i < node.getPossibleSplitFeatures().length; i++){
               if (a != node.getPossibleSplitFeatures()[i]) {
                 if(!skipped){
-                  possibleFeatures[i] = node.getPossibleSplitFeatures()[i];
+                  try{
+                    possibleFeatures[i] = node.getPossibleSplitFeatures()[i];
+                  }catch(IndexOutOfBoundsException e){
+                    System.out.println("INDEX: " + i);
+                    System.out.println("Feature: " + a);
+                    System.out.println("AmountOfFeatures " + possibleFeatures.length);
+                    throw new IllegalArgumentException();
+                  }
                 }else{possibleFeatures[i-1] = node.getPossibleSplitFeatures()[i]; }
               }else{skipped = true;}
             }
