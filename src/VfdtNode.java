@@ -122,7 +122,6 @@ public class VfdtNode {
    */
   public static double informationGain(int featureId, int[][][] nijk) {
     double ig = 0;
-
     // Step 1: find amount of examples and amount belonging to class c.
     double totalEx = 0;
     int amountOfClasses = nijk[0][0].length;
@@ -132,6 +131,9 @@ public class VfdtNode {
         totalEx += nijk[featureId][j][k];
         amountPerClass[k] += nijk[featureId][j][k];
       }
+    }
+    if(totalEx == 0){
+      return 0;
     }
     double currentEntropy = calculateEntropy(amountPerClass, totalEx);
 
