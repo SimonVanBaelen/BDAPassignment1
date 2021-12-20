@@ -23,17 +23,17 @@ DATA_VFDT_NOISE=${DATAFOLDER}/noisy/VFDT/
 NB_FEATURE_VALUES=${DATAFOLDER}/nbFeatureValues.csv
 
 
-# Parameters for perceptron
-ETA=0.00001
+# Parameters for perceptron --> 0.00001 vele beter
+ETA=0.000000001
 
 # Parameters for VFDT
-DELTA=0.000001
+DELTA=0.0000001
 TAU=0.05
 NMIN=200
 
 # Experiment parameters
 OUT=out
-PERIOD=30000  # Original was 200000
+PERIOD=100000  # Original was 200000
 
 # Compilation  ###############################################################
 
