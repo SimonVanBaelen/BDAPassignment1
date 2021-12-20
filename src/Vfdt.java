@@ -91,6 +91,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
             }
           }
           deltaG = Ga - Gb;
+          System.out.println(deltaG);
         }else{
           a = node.getPossibleSplitFeatures()[0];
           deltaG = node.splitEval(a);
