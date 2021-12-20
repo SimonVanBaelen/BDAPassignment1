@@ -155,9 +155,6 @@ public class VfdtNode {
         amountSubset += allClassesOfSubSets[i][o];
       }
       double cei = calculateEntropy(allClassesOfSubSets[i], amountSubset);
-      if(featureId == 1){
-        System.out.println("CEI 1 BE LIKE: " + cei);
-      }
       entropySubsets += cei*(amountSubset/totalEx);
     }
     ig = currentEntropy - entropySubsets;
@@ -166,12 +163,15 @@ public class VfdtNode {
 
   private static double calculateEntropy(double[] amountPerClass, double S) {
     double ce = 0;
+    System.out.println("///////////////////////////////////////////////////////////////////////");
     for (int i = 0; i < amountPerClass.length; i++){
       double pi = amountPerClass[i]/S;
+      System.out.println(ce);
       if(pi != 0){
         ce -= pi* (log(pi)/log(2));
       }
     }
+    System.out.println("///////////////////////////////////////////////////////////////////////");
     return ce;
   }
 
