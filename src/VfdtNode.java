@@ -163,15 +163,14 @@ public class VfdtNode {
 
   private static double calculateEntropy(double[] amountPerClass, double S) {
     double ce = 0;
-    System.out.println("///////////////////////////////////////////////////////////////////////");
-    for (int i = 0; i < amountPerClass.length; i++){
-      double pi = amountPerClass[i]/S;
-      System.out.println(S);
-      if(pi != 0){
-        ce -= pi* (log(pi)/log(2));
+    if(S > 0){
+      for (int i = 0; i < amountPerClass.length; i++){
+        double pi = amountPerClass[i]/S;
+        if(pi != 0){
+          ce -= pi* (log(pi)/log(2));
+        }
       }
     }
-    System.out.println("///////////////////////////////////////////////////////////////////////");
     return ce;
   }
 
