@@ -185,7 +185,7 @@ public class VfdtNode {
     }
     ig = currentEntropy - entropySubsets;
     if(featureId == 190){
-      System.out.println(entropySubsets);
+      System.out.println(currentEntropy);
     }
     return ig;
   }
