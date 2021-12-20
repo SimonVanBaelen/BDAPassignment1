@@ -75,11 +75,12 @@ public class Vfdt extends IncrementalLearner<Integer> {
       int sizeNijk = node.getNijkSize();
       if(sizeNijk % nmin == 0 && sizeNijk > 0){
         double deltaG;
+        int a;
         // Step 2.2: check Hoeffding bound
         if(node.getPossibleSplitFeatures().length > 1){
           int[] possibleSplitFeatures = node.getPossibleSplitFeatures();
           double Ga = 0;
-          int a = 0;
+          a = 0;
           double Gb = 0;
           for(int i:possibleSplitFeatures){
             double G = node.splitEval(i);
@@ -92,7 +93,8 @@ public class Vfdt extends IncrementalLearner<Integer> {
           }
           deltaG = Ga - Gb;
         }else{
-          deltaG = node.splitEval(node.getPossibleSplitFeatures()[0]);
+          a = node.getPossibleSplitFeatures()[0];
+          deltaG = node.splitEval(a);
         }
 
         double epsilon = sqrt(log(1/tau)/ (2*sizeNijk));
