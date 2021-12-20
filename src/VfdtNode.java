@@ -187,7 +187,9 @@ public class VfdtNode {
     double ce = 0;
     for (int i = 0; i < amountPerClass.length; i++){
       double pi = amountPerClass[i]/S;
-      ce -= pi* (log(pi)/log(2));
+      if(pi != 0){
+        ce -= pi* (log(pi)/log(2));
+      }
     }
     return ce;
   }
