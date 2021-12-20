@@ -96,9 +96,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
           deltaG = node.splitEval(a);
         }
         double epsilon = sqrt(log(1/delta)/ (2*sizeNijk));
-        System.out.println("Hoeffding bound: " + epsilon);
-        System.out.println("DeltaG: " + deltaG);
-        if(deltaG < delta || deltaG > epsilon){
+        if(epsilon < tau || deltaG > epsilon){
           // Create all possible features for child nodes.
           Boolean skipped = false;
           node.setSplitFeature(a);
