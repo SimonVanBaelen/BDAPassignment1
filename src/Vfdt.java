@@ -140,16 +140,20 @@ public class Vfdt extends IncrementalLearner<Integer> {
     double totalOne = node.getTotalOnes();
     double totalZero = node.getTotalZeros();
     double prediction = 0;
+    // return the percentage ones in full set.
     if(totalOne != 0 && totalZero != 0){
       prediction = totalOne/(totalZero+totalOne);
       return prediction;
     }else if(totalOne != 0){
+      // All stored class values are c=1.
       prediction = 1;
       return prediction;
     }else if(totalZero != 0){
+      // All stored class values are c=0.
       prediction = 0;
       return prediction;
     }else{
+      // No examples stored in node!
       prediction = 0.5;
       return prediction;
     }
@@ -187,6 +191,11 @@ public class Vfdt extends IncrementalLearner<Integer> {
     writer.close();
   }
 
+  /**
+   * Recursively makes string for each node, which is then stored in the helper list.
+   *
+   * @param node the node for which the string gets made. This function gets called for its children as well.
+   */
   private void getNodeStrings(VfdtNode node){
     StringBuilder nodeInfo;
     VfdtNode[] children = node.getChildren();
@@ -223,7 +232,6 @@ public class Vfdt extends IncrementalLearner<Integer> {
       helperList[node.getID()] = nodeInfo.toString();
     }
   }
-  private int max;
   /**
    * Reads in the model in the file and sets it as the current model. Sets the number of examples
    * processed.

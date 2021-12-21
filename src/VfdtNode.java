@@ -21,10 +21,13 @@ public class VfdtNode {
 
   private int[] nbFeatureValues;
 
+  // Amount of one class values
   private int totalOnes;
 
+  // Amount of zero class values
   private int totalZeros;
 
+  //Ids of all children
   private int[] childIDs = null;
 
   /* FILL IN HERE */
@@ -47,14 +50,26 @@ public class VfdtNode {
     totalZeros = 0; totalOnes = 0;
   }
 
+  /**
+   * Returns nijk
+   * @return nijk
+   */
   public int[][][] getNijk(){
     return nijk;
   }
 
+  /**
+   * Returns possible split features
+   * @return possibleSplitFeatures
+   */
   public int[] getPossibleSplitFeatures(){
     return possibleSplitFeatures;
   }
 
+  /**
+   * Set the splitfeature to a new value
+   * @param f the new split feature
+   */
   public void setSplitFeature(int f){
     splitFeature = f;
   }
@@ -69,7 +84,6 @@ public class VfdtNode {
    */
   public void addChildren(int splitFeature, VfdtNode[] nodes) {
     if (nodes == null) throw new IllegalArgumentException("null children");
-//    nbSplits++;
 
     // Add the feature on which was split.
     this.splitFeature = splitFeature;
@@ -77,7 +91,6 @@ public class VfdtNode {
     int n = nbFeatureValues[splitFeature];
     children = new VfdtNode[n];
     for (int i = 0; i < n; i++){
-      //new VfdtNode(this.nbFeatureValues,possibleFeatures)
       children[i] = nodes[i];
     }
     nijk = null;
@@ -137,7 +150,7 @@ public class VfdtNode {
     }
     double currentEntropy = calculateEntropy(amountPerClass, totalEx);
 
-    // Step 2: iterate over all nijk and create the nijk of all subsets.
+    // Step 2: Calculate the different distribution of class values in different values for featureID.
     double[][] allClassesOfSubSets = new double[nijk[featureId].length][amountOfClasses];
     for(int j = 0; j < nijk[featureId].length; j++){
       for(int k = 0; k < nijk[featureId][j].length; k++){
@@ -161,6 +174,13 @@ public class VfdtNode {
     return ig;
   }
 
+  /**
+   * Calculates the information gain
+   *
+   * @param amountPerClass Distribution of different classes of a feature
+   * @param S Size of subset f
+   * @return the entropy of the subset
+   */
   private static double calculateEntropy(double[] amountPerClass, double S) {
     double ce = 0;
     if(S > 0){
@@ -195,7 +215,10 @@ public class VfdtNode {
     }
   }
 
-
+  /**
+   * Returns the size of nijk
+   * @return size of nijk
+   */
   public int getNijkSize() {
     int f = possibleSplitFeatures[0];
     int totalEx = 0;
@@ -219,6 +242,10 @@ public class VfdtNode {
     return totalZeros;
   }
 
+  /**
+   * Uodates the totalZeros and totalOnes
+   * @param c which value needs to be updated
+   */
   public void update(int c) {
     if(c == 0){
       totalZeros += 1;
