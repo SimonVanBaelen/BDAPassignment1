@@ -24,7 +24,7 @@ NB_FEATURE_VALUES=${DATAFOLDER}/nbFeatureValues.csv
 
 
 # Parameters for perceptron --> 0.00001 vele beter 0.000000001
-ETA=1
+ETA=0.000000001
 
 # Parameters for VFDT
 DELTA=0.0000001
@@ -33,7 +33,7 @@ NMIN=200
 
 # Experiment parameters
 OUT=out
-PERIOD=50000  # Original was 200000
+PERIOD=100000  # Original was 200000
 
 # Compilation  ###############################################################
 

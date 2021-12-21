@@ -142,7 +142,7 @@ public class Vfdt extends IncrementalLearner<Integer> {
     double prediction = 0;
     if(totalOne != 0 && totalZero != 0){
       prediction = totalOne/(totalZero+totalOne);
-      return (prediction > 0.5) ? 1:0;
+      return prediction;
     }else if(totalOne != 0){
       prediction = 1;
       return prediction;
