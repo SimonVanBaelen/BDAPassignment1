@@ -27,8 +27,8 @@ NB_FEATURE_VALUES=${DATAFOLDER}/nbFeatureValues.csv
 ETA=0.000000001
 
 # Parameters for VFDT
-DELTA=0.0000001
-TAU=0.0125
+DELTA=0.0000000001
+TAU=0.05
 NMIN=200
 
 # Experiment parameters
