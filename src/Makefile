@@ -24,7 +24,7 @@ NB_FEATURE_VALUES=${DATAFOLDER}/nbFeatureValues.csv
 
 
 # Parameters for perceptron --> 0.00001 vele beter 0.000000001
-ETA=0.000000001
+ETA=1
 
 # Parameters for VFDT
 DELTA=0.0000001
